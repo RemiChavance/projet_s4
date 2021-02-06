@@ -9,13 +9,17 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { CreateGroupeComponent } from './groupe/create-groupe/create-groupe.component';
 
 
 const appRoutes: Routes = [
+  { path: 'home', component: HomeComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: '**', redirectTo: '' }
+  { path: 'groupe/create-groupe', component: CreateGroupeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
@@ -23,7 +27,9 @@ const appRoutes: Routes = [
     AppComponent,
     SignupComponent,
     SigninComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent,
+    CreateGroupeComponent
   ],
   imports: [
     BrowserModule,
