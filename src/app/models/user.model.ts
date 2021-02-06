@@ -2,8 +2,8 @@ import { Groupe } from "./groupe.model";
 
 export class User {
     constructor(
-        public email: string,
-        //public password: string,
+        public id: string,
+        public email?: string,
         public nom?: string,
         public groupes?: Groupe[],
         public notes?: number[],

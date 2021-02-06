@@ -12,6 +12,7 @@ export class AppComponent {
 
   constructor() {
     
+    // Firebase access
     const firebaseConfig = {
       apiKey: "AIzaSyC1zspIj9wrsBiQX16g20kEfWJ0C-oGqDI",
       authDomain: "projet-s4-ghac.firebaseapp.com",
@@ -21,9 +22,8 @@ export class AppComponent {
       messagingSenderId: "378917706292",
       appId: "1:378917706292:web:00d412b6082bb39b0fc861"
     };
+
     // Initialize Firebase
     firebase.default.initializeApp(firebaseConfig);
-
   }
-  
 }

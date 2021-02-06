@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+
   user: User;
   userSubscription: Subscription;
 
@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
     this.userSubscription = this.authService.userSubject.subscribe(
       (user: User) => {
         this.user = user;
-        console.log(this.user);
       }
     );
     this.authService.emitUser();
