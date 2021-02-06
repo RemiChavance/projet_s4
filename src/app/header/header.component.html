@@ -6,17 +6,26 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item mr-sm-2" routerLinkActive="active" *ngIf="!isAuth">
+            <li class="nav-item mr-sm-2" routerLinkActive="active" *ngIf="!user">
                 <a routerLink="auth/signup">Créer un compte</a>
             </li>
-            <li class="nav-item my-2 my-sm-0" routerLinkActive="active" *ngIf="!isAuth">
+            <li class="nav-item my-2 my-sm-0" routerLinkActive="active" *ngIf="!user">
                 <a routerLink="auth/signin">Connexion</a>
             </li>
-            <li class="nav-item">
-                <a (click)="onSignOut()"
-                    style="cursor:pointer"
-                    *ngIf="isAuth">Déconnexion</a>
+            <li class="nav-item" *ngIf="user">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span> {{ user.email }}</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" (click)="onSignOut()">Déconnexion</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item disabled">Disabled</a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
 </nav>
+
+
