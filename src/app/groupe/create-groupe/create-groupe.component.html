@@ -1,1 +1,21 @@
-<p>formulaire de création d'un groupe</p>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <h2>Créer un compte</h2>
+
+        <form [formGroup]="createGroupForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="nom">Nom de votre nouveau groupe</label>
+                <input type="text"
+                        id="nom"
+                        class="form-control"
+                        formControlName="nom">
+            </div>
+
+            <button class="btn btn-primary"
+                    type="submit"
+                    [disabled]="createGroupForm.invalid">Créer mon groupe</button>
+        </form>
+
+        <p class="text-danger">{{ errorMessage }}</p>
+    </div>
+</div>

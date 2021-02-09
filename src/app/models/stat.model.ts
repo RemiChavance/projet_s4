@@ -2,8 +2,8 @@ import { User } from "./user.model";
 
 export class Stat {
     constructor(
-        user: User,
-        nbCommentaires: number,
-        notes: number[]
+        public user: User,
+        public nbCommentaires: number,
+        public notes: number[]
     ) { }
 }

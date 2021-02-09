@@ -6,6 +6,7 @@ export class Groupe {
     constructor(
         public nom: string,
         public admin: User,
+        public idGroupe?: number,
         public demandes?: User[],
         public stats?: Stat[],
         public recettes?: Recette[]
