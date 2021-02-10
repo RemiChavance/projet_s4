@@ -25,9 +25,9 @@ export class AuthService {
    * Create a new user in base and connect him
    * @param email 
    * @param password 
-   * @param nom 
+   * @param name
    */
-  createNewUser(email: string, password: string, nom: string) {
+  createNewUser(email: string, password: string, name: string) {
     return new Promise<void>(
       (resolve, reject) => {
         firebase.default.auth().createUserWithEmailAndPassword(email, password).then(
@@ -36,12 +36,12 @@ export class AuthService {
               firebase.default.auth().currentUser.uid
             );
             this.user.email = email;
-            this.user.nom = nom;
+            this.user.name = name;
             //-- A replacer par les valeurs du formulaire --
             //   auth/signup par la suite
-            this.user.nbCommentaires = 5;
-            this.user.notes = [1, 5 , 3];
-            this.user.groupes = [];
+            this.user.nbComments = 5;
+            this.user.rates = [1, 5 , 3];
+            this.user.groups = [];
             //----------------------------------------------
             firebase.default.database().ref('/user/' + this.user.id).set(this.user);
             this.emitUser();

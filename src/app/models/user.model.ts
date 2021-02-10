@@ -1,12 +1,12 @@
-import { Groupe } from "./groupe.model";
+import { Group } from "./group.model";
 
 export class User {
     constructor(
         public id: string,
         public email?: string,
-        public nom?: string,
-        public groupes?: Groupe[],
-        public notes?: number[],
-        public nbCommentaires?: number
+        public name?: string,
+        public groups?: Group[],
+        public rates?: number[],
+        public nbComments?: number
     ) { }
 }

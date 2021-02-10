@@ -1,36 +1,37 @@
 import { Injectable } from "@angular/core";
-import { rejects } from "assert";
 import * as firebase from 'firebase';
-import { Groupe } from "../models/groupe.model";
+import { Group } from "../models/group.model";
 import { User } from "../models/user.model";
 
 @Injectable({
     providedIn: 'root'
 })
-export class GroupeService {
+export class GroupCreationService {
   
     constructor() { }
 
-    createNewGroupe(nom: string, admin: User) {
-        return new Promise<void>(
+    createNewGroupe(name: string, admin: User) {
+        return new Promise<number>(
             (resolve, reject) => {
-                let newGroup: Groupe = new Groupe(nom, admin);
+                let newGroup: Group = new Group(name, admin);
                 this.getNextId().then( // Get next Id to assign it to the new group
                     (data) => {
-                        newGroup.idGroupe = data;
-                        newGroup.demandes = [];
+                        newGroup.idGroup = data;
+                        newGroup.requests = [];
                         newGroup.stats = [];
-                        newGroup.recettes = [];        
-                        // Create new group                
-                        firebase.default.database().ref('/group/' + newGroup.idGroupe).set(newGroup).then(
-                            () => {
-                                this.updateNextGroupId();
-                                resolve();
+                        newGroup.recipes = [];        
+                        // Create new group
+                        firebase.default.database().ref('/group/nextGroupId').set(data + 1);           
+                        firebase.default.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
+                            () => { 
+                                resolve(newGroup.idGroup);
                             }
                         );
+                        
+                    }, (error) => {
+                        reject(error);
                     }
                 )
-                resolve();
             }
         );
     }
@@ -39,12 +40,8 @@ export class GroupeService {
     /**
      * Update nextGroupId in database by adding 1 to it
      */
-    updateNextGroupId() {
-        this.getNextId().then(
-            (data) => {
-                firebase.default.database().ref('/group/nextGroupId').set(data + 1);
-            }
-        )
+    updateNextGroupId(id: number) {
+        firebase.default.database().ref('/group/nextGroupId').set(id);
     }
 
     /**

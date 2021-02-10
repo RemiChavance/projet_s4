@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { GroupeService } from 'src/app/services/groupe.service';
+import { GroupCreationService } from 'src/app/services/group-creation.service';
 
 @Component({
-  selector: 'app-create-groupe',
-  templateUrl: './create-groupe.component.html',
-  styleUrls: ['./create-groupe.component.css']
+  selector: 'app-create-group',
+  templateUrl: './create-group.component.html',
+  styleUrls: ['./create-group.component.css']
 })
-export class CreateGroupeComponent implements OnInit {
+export class CreateGroupComponent implements OnInit {
 
   createGroupForm: FormGroup;
   errorMessage: string;
@@ -20,7 +20,7 @@ export class CreateGroupeComponent implements OnInit {
   userSubscription: Subscription;
 
   constructor(private formBuilder: FormBuilder,
-              private groupeService: GroupeService,
+              private groupCreationService: GroupCreationService,
               private router: Router,
               private authService: AuthService) { }
 
@@ -44,9 +44,9 @@ export class CreateGroupeComponent implements OnInit {
     const nom = this.createGroupForm.get('nom').value;
     const user = this.user;
 
-    this.groupeService.createNewGroupe(nom, user).then(
-      () => {
-        this.router.navigate(['/books']); //navigate to the group page
+    this.groupCreationService.createNewGroupe(nom, user).then(
+      (id) => {
+        this.router.navigate(['/groupe', id]);
       },
       (error) => {
         this.errorMessage = error;

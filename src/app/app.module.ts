@@ -10,14 +10,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
-import { CreateGroupeComponent } from './groupe/create-groupe/create-groupe.component';
+import { CreateGroupComponent } from './group/create-group/create-group.component';
+import { GroupComponent } from './group/group.component';
+import { GroupCreationService } from './services/group-creation.service';
+import { GroupManagerService } from './services/group-manager.service';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'groupe/create-groupe', component: CreateGroupeComponent },
+  { path: 'groupe/create-groupe', component: CreateGroupComponent },
+  { path: 'groupe/:id', component: GroupComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
@@ -29,7 +33,8 @@ const appRoutes: Routes = [
     SigninComponent,
     HeaderComponent,
     HomeComponent,
-    CreateGroupeComponent
+    CreateGroupComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    AuthService
+    AuthService,
+    GroupCreationService,
+    GroupManagerService
   ],
   bootstrap: [AppComponent]
 })

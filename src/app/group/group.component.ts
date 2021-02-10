@@ -1,0 +1,29 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Group } from '../models/group.model';
+import { GroupManagerService } from '../services/group-manager.service';
+
+@Component({
+  selector: 'app-group',
+  templateUrl: './group.component.html',
+  styleUrls: ['./group.component.css']
+})
+export class GroupComponent implements OnInit {
+
+  group: Group;
+
+  constructor(private groupManagerService: GroupManagerService,
+              private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.groupManagerService.getGroupeById(
+      this.route.snapshot.params['id']
+    ).then(
+      (data) => {
+        this.group = data;
+        console.log(this.group);
+      }
+    )
+}
+
+}
