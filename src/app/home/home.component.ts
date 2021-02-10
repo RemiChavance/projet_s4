@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   }
 
   onCreateGroupe() {
-    this.router.navigate(['/groupe', 'create-groupe']);
+    this.router.navigate(['/group', 'create-group']);
   }
 
 }

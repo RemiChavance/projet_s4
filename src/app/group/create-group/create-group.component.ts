@@ -36,17 +36,17 @@ export class CreateGroupComponent implements OnInit {
 
   initForm() {
     this.createGroupForm = this.formBuilder.group({
-      nom: ['', [Validators.required]]
+      name: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
-    const nom = this.createGroupForm.get('nom').value;
+    const name = this.createGroupForm.get('name').value;
     const user = this.user;
 
-    this.groupCreationService.createNewGroupe(nom, user).then(
+    this.groupCreationService.createNewGroupe(name, user).then(
       (id) => {
-        this.router.navigate(['/groupe', id]);
+        this.router.navigate(['/group', id]);
       },
       (error) => {
         this.errorMessage = error;

@@ -20,8 +20,8 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'groupe/create-groupe', component: CreateGroupComponent },
-  { path: 'groupe/:id', component: GroupComponent },
+  { path: 'group/create-group', component: CreateGroupComponent },
+  { path: 'group/:id', component: GroupComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
