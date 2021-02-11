@@ -27,7 +27,7 @@ export class AppComponent {
     firebase.default.initializeApp(firebaseConfig);
 
 
-    //test github !!
+    //test devAmandine !!
 
   }
 
