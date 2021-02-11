@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GroupedObservable } from 'rxjs';
 import { Group } from '../models/group.model';
 import { GroupManagerService } from '../services/group-manager.service';
 
@@ -16,14 +17,15 @@ export class GroupComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.group = new Group('', null);
+    this.groupManagerService.groupSubject.subscribe(
+      (group) => {
+        this.group = group;
+      }
+    );
     this.groupManagerService.getGroupeById(
       this.route.snapshot.params['id']
-    ).then(
-      (data) => {
-        this.group = data;
-        console.log(this.group);
-      }
-    )
+    );
 }
 
 }
