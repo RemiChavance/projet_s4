@@ -15,7 +15,6 @@ import { GroupComponent } from './group/group.component';
 import { GroupCreationService } from './services/group-creation.service';
 import { GroupManagerService } from './services/group-manager.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
 
 
 const appRoutes: Routes = [
@@ -45,7 +44,6 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    MatButtonModule
   ],
   providers: [
     AuthService,
