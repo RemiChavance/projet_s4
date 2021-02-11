@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GroupedObservable } from 'rxjs';
 import { Group } from '../models/group.model';
 import { GroupManagerService } from '../services/group-manager.service';
 
