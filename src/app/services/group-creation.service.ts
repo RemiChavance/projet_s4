@@ -36,14 +36,6 @@ export class GroupCreationService {
         );
     }
 
-
-    /**
-     * Update nextGroupId in database by adding 1 to it
-     */
-    updateNextGroupId(id: number) {
-        firebase.default.database().ref('/group/nextGroupId').set(id);
-    }
-
     /**
      * Return next available group id
      */

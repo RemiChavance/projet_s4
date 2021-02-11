@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import * as firebase from 'firebase';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   user: User;
   userSubscription: Subscription;
@@ -22,10 +22,15 @@ export class HeaderComponent implements OnInit {
         this.user = user;
       }
     );
-    this.authService.emitUser();
   }
 
   onSignOut() {
     this.authService.signOutUser();
   }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+  }
+
+
 }

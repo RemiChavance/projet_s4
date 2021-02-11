@@ -25,7 +25,4 @@ export class AppComponent {
     // Initialize Firebase
     firebase.default.initializeApp(firebaseConfig);
   }
-
-  // dev remi
-    
 }
