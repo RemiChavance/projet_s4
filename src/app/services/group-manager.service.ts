@@ -13,17 +13,25 @@ export class GroupManagerService {
 
     constructor() { }
 
+    /**
+     * Emit group
+     */
+    emitGroup() {
+        this.groupSubject.next(this.group);
+    }
 
     /**
      * return Groupe by id
      * @param id
      */
     getGroupeById(id: number) {
-        return new Promise<Group>(
+        return new Promise<void>(
             (resolve, reject) => {
                 firebase.default.database().ref('/group/' + id).once('value').then(
                     (data) => {
-                        resolve(data.val());
+                        this.group = data.val();
+                        this.emitGroup();
+                        resolve();
                     }, (error) => {
                         reject(error);
                     }
