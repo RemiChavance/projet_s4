@@ -14,6 +14,7 @@ export class SigninComponent implements OnInit {
   errorMessage: string;
 
   emailValidator = new FormControl('', [Validators.required, Validators.email]);
+  passwordValidator = new FormControl('', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]);
   hidePassword = true;
   
   constructor(private formBuilder: FormBuilder,
@@ -27,7 +28,7 @@ export class SigninComponent implements OnInit {
   initForm() {
     this.signUpForm = this.formBuilder.group({
       email: this.emailValidator,
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      password: this.passwordValidator
     });
   }
 
@@ -37,7 +38,7 @@ export class SigninComponent implements OnInit {
 
     this.authService.signInUser(email, password).then(
       () => {
-        this.router.navigate(['/books']);
+        this.router.navigate(['/home']);
         console.log("Connected ! ")
       },
       (error) => {

@@ -9,7 +9,7 @@
                 <input matInput placeholder="pat@example.com"
                         [formControl]="emailValidator"
                         formControlName="email"
-                        required>
+                        >
                 <mat-error *ngIf="emailValidator.invalid">{{ getErrorEmailMessage() }}</mat-error>
             </mat-form-field>
 

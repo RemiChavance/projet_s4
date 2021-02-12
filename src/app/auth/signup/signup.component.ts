@@ -14,6 +14,8 @@ export class SignupComponent implements OnInit {
   errorMessage: string;
 
   emailValidator = new FormControl('', [Validators.required, Validators.email]);
+  passwordValidator = new FormControl('', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]);
+  nameValidator = new FormControl('', [Validators.required]);
   hidePassword = true;
 
   constructor(private formBuilder: FormBuilder,
@@ -27,8 +29,8 @@ export class SignupComponent implements OnInit {
   initForm() {
     this.signUpForm = this.formBuilder.group({
       email: this.emailValidator,
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
-      name: ['', [Validators.required]]
+      password: this.passwordValidator,
+      name: this.nameValidator
     });
   }
 
@@ -39,7 +41,7 @@ export class SignupComponent implements OnInit {
 
     this.authService.createNewUser(email, password, name).then(
       () => {
-        this.router.navigate(['/books']);
+        this.router.navigate(['/home']);
         console.log("Account created !");
         console.log("Connected !");
       },
