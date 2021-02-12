@@ -19,13 +19,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'group/create-group', component: CreateGroupComponent },
+  { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
   { path: 'group/:id', component: GroupComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
@@ -55,8 +56,9 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthService,
+    AuthGuardService,
     GroupCreationService,
-    GroupManagerService
+    GroupManagerService,
   ],
   bootstrap: [AppComponent]
 })

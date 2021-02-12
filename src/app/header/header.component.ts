@@ -22,6 +22,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.user = user;
       }
     );
+
+    // Vérification de la connection
+    firebase.default.auth().onAuthStateChanged(
+      (user) => {
+        if(user) {
+          this.authService.getUser(user.uid).then(
+            (data: User) => {
+              this.authService.user = data;
+              this.authService.emitUser();
+            }
+          );
+        }
+      }
+    );
   }
 
   onSignOut() {
