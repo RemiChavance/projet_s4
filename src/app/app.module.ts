@@ -15,6 +15,9 @@ import { GroupComponent } from './group/group.component';
 import { GroupCreationService } from './services/group-creation.service';
 import { GroupManagerService } from './services/group-manager.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 const appRoutes: Routes = [
@@ -39,11 +42,13 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     AuthService,
