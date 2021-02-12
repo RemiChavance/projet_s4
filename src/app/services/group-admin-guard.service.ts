@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { GroupAdminService } from './group-admin.service';
 
@@ -9,7 +9,7 @@ import { GroupAdminService } from './group-admin.service';
 export class GroupAdminGuardService implements CanActivate {
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
               private groupAdminService: GroupAdminService) { }
 
 
@@ -17,10 +17,12 @@ export class GroupAdminGuardService implements CanActivate {
     return new Promise(
       (resolve, reject) => {
         if(this.groupAdminService.user === undefined || this.groupAdminService.group === undefined) {
+          this.router.navigate(['/home']);
           resolve(false);
         } else if(this.groupAdminService.user.id == this.groupAdminService.group.adminId) {
           resolve(true);
         } else {
+          this.router.navigate(['/group', this.groupAdminService.group.idGroup]);
           resolve(false);
         }
       }
