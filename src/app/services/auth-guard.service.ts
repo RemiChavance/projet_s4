@@ -16,7 +16,6 @@ export class AuthGuardService implements CanActivate {
         firebase.default.auth().onAuthStateChanged(
           (user) => {
             if(user) {
-              console.log(user.uid);
               resolve(true);
             } else {
               this.router.navigate(['/auth', 'signin']);

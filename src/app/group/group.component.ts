@@ -11,6 +11,7 @@ import { GroupManagerService } from '../services/group-manager.service';
 export class GroupComponent implements OnInit {
 
   group: Group;
+  nonExistentGroup = false;
 
   constructor(private groupManagerService: GroupManagerService,
               private route: ActivatedRoute) { }
@@ -19,7 +20,12 @@ export class GroupComponent implements OnInit {
     this.group = new Group('', null);
     this.groupManagerService.groupSubject.subscribe(
       (group) => {
-        this.group = group;
+        if(group) {
+          this.group = group;
+        } else {
+          this.nonExistentGroup = true;
+        }
+        
       }
     );
     this.groupManagerService.getGroupeById(

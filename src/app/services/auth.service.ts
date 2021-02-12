@@ -18,6 +18,7 @@ export class AuthService {
    */
   emitUser() {
     this.userSubject.next(this.user);
+    console.log(this.user);
   }
 
   /**
@@ -69,8 +70,6 @@ export class AuthService {
             );
             this.getUser(this.user.id).then(
               (user: User) => {
-                console.log("User fetched : ");
-                console.log(user);
                 this.user = user;
                 this.emitUser();
               }
@@ -92,7 +91,6 @@ export class AuthService {
     firebase.default.auth().signOut();
     this.user = null;
     this.emitUser();
-    console.log("Disconnected !");
   }
 
   /**

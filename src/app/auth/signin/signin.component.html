@@ -26,9 +26,12 @@
 
             <button class="btn btn-primary"
                     type="submit"
-                    [disabled]="signUpForm.invalid">Connexion</button>
+                    [disabled]="signUpForm.invalid">
+                    Connexion
+            </button>
+            <br>
+            <p class="text-danger">{{ errorMessage }}</p>
+            <a routerLink="/auth/signup">Pas de compte ?</a>
         </form>
-        <br>
-        <p class="text-danger">{{ errorMessage }}</p>
     </div>
 </div>
