@@ -20,6 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AdminGroupComponent } from './group/admin-group/admin-group.component';
+import { GroupAdminGuardService } from './services/group-admin-guard.service';
+import { GroupAdminService } from './services/group-admin.service';
 
 
 const appRoutes: Routes = [
@@ -28,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'auth/signin', component: SigninComponent },
   { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
   { path: 'group/:id', component: GroupComponent },
+  { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
@@ -40,7 +44,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     HomeComponent,
     CreateGroupComponent,
-    GroupComponent
+    GroupComponent,
+    AdminGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,8 @@ const appRoutes: Routes = [
     AuthGuardService,
     GroupCreationService,
     GroupManagerService,
+    GroupAdminGuardService,
+    GroupAdminService
   ],
   bootstrap: [AppComponent]
 })

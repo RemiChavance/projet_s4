@@ -5,7 +5,7 @@ import { User } from "./user.model";
 export class Group {
     constructor(
         public name: string,
-        public admin: User,
+        public adminId: string,
         public idGroup?: number,
         public requests?: User[],
         public stats?: Stat[],

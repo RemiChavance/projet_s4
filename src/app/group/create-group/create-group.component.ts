@@ -44,7 +44,7 @@ export class CreateGroupComponent implements OnInit {
     const name = this.createGroupForm.get('name').value;
     const user = this.user;
 
-    this.groupCreationService.createNewGroupe(name, user).then(
+    this.groupCreationService.createNewGroupe(name, user.id).then(
       (id) => {
         this.router.navigate(['/group', id]);
       },

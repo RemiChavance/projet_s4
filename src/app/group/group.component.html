@@ -2,3 +2,11 @@
 <p> {{ group.name }}</p>
 
 <p *ngIf="nonExistentGroup">Ce groupe n'existe pas</p>
+
+
+<p *ngIf="user != null && group.adminId == user.id">
+    <button mat-flat-button
+            color="warn"
+            (click)="accessAdminPage()"
+    >Page Admin</button>
+</p>

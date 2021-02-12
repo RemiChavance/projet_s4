@@ -10,18 +10,18 @@ export class GroupCreationService {
   
     constructor() { }
 
-    createNewGroupe(name: string, admin: User) {
+    createNewGroupe(name: string, adminId: string) {
         return new Promise<number>(
             (resolve, reject) => {
-                let newGroup: Group = new Group(name, admin);
+                let newGroup: Group = new Group(name, adminId);
                 this.getNextId().then( // Get next Id to assign it to the new group
-                    (data) => {
-                        newGroup.idGroup = data;
+                    (nextGroupId) => {
+                        newGroup.idGroup = nextGroupId;
                         newGroup.requests = [];
                         newGroup.stats = [];
                         newGroup.recipes = [];        
                         // Create new group
-                        firebase.default.database().ref('/group/nextGroupId').set(data + 1);           
+                        firebase.default.database().ref('/group/nextGroupId').set(nextGroupId + 1);           
                         firebase.default.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
                             () => { 
                                 resolve(newGroup.idGroup);
