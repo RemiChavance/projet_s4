@@ -13,6 +13,9 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   errorMessage: string;
 
+  emailValidator = new FormControl('', [Validators.required, Validators.email]);
+  hidePassword = true;
+
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private router: Router) { }
@@ -23,7 +26,7 @@ export class SignupComponent implements OnInit {
 
   initForm() {
     this.signUpForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: this.emailValidator,
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
       name: ['', [Validators.required]]
     });
@@ -44,5 +47,13 @@ export class SignupComponent implements OnInit {
         this.errorMessage = error;
       }
     );
+  }
+
+  getErrorEmailMessage() {
+    if (this.emailValidator.hasError('required')) {
+      return 'Vous devez entrer une valeur';
+    }
+
+    return this.emailValidator.hasError('email') ? 'Email invalide' : '';
   }
 }

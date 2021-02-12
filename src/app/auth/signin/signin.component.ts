@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,6 +12,9 @@ export class SigninComponent implements OnInit {
 
   signUpForm: FormGroup;
   errorMessage: string;
+
+  emailValidator = new FormControl('', [Validators.required, Validators.email]);
+  hidePassword = true;
   
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -23,7 +26,7 @@ export class SigninComponent implements OnInit {
 
   initForm() {
     this.signUpForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: this.emailValidator,
       password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
     });
   }
@@ -41,6 +44,15 @@ export class SigninComponent implements OnInit {
         this.errorMessage = error;
       }
     );
+  }
+
+
+  getErrorEmailMessage() {
+    if (this.emailValidator.hasError('required')) {
+      return 'Vous devez entrer une valeur';
+    }
+
+    return this.emailValidator.hasError('email') ? 'Email invalide' : '';
   }
 
 }
