@@ -39,4 +39,25 @@ export class GroupManagerService {
             }
         );
     }
+
+    /**
+     * Return all groups
+     */
+    getAllGroups() {
+        return new Promise<Group[]>(
+            (resolve, reject) => {
+                firebase.default.database().ref('/group/').once('value').then(
+                    (data) => {
+                        let dataArray = new Array<Group>();
+                        let dataVal = data.val();
+                        for (let key in dataVal) {
+                            dataArray.push(dataVal[key]);
+                        }
+                        dataArray.splice(-1, 1);
+                        resolve(dataArray);
+                    }
+                );
+            }
+        );
+    }
 }

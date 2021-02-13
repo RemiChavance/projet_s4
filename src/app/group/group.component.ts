@@ -29,7 +29,7 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.group = new Group('', null);
-    this.user = new User('');
+    //this.user = new User('');
 
     this.groupSubscription = this.groupManagerService.groupSubject.subscribe(
       (group) => {
@@ -48,6 +48,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.userSubject.subscribe(
       (user) => {
         this.user = user;
+        this.authService.emitUser();
       }
     );
   }

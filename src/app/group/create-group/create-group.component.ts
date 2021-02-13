@@ -43,6 +43,7 @@ export class CreateGroupComponent implements OnInit {
   onSubmit() {
     const name = this.createGroupForm.get('name').value;
     const user = this.user;
+    console.log(this.user);
 
     this.groupCreationService.createNewGroupe(name, user.id).then(
       (id) => {

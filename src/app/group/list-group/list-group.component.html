@@ -1,1 +1,13 @@
-<p>list-group works!</p>
+
+<div *ngIf="groups">
+
+    <h4>Groupes</h4>
+    
+    <ul>
+        <li *ngFor="let group of groups">
+            <a routerLink="/group/{{group.idGroup}}"> {{ group.name }} </a>
+        </li>
+    </ul>
+
+
+</div>
