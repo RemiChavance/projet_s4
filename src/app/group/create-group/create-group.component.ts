@@ -26,12 +26,11 @@ export class CreateGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.userSubscription = this.authService.userSubject.subscribe(
+    this.userSubscription = this.authService.currentUser.subscribe(
       (user: User) => {
         this.user = user;
       }
     );
-    this.authService.emitUser();
   }
 
   initForm() {

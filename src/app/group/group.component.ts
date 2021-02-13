@@ -29,7 +29,6 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.group = new Group('', null);
-    //this.user = new User('');
 
     this.groupSubscription = this.groupManagerService.groupSubject.subscribe(
       (group) => {
@@ -45,10 +44,9 @@ export class GroupComponent implements OnInit, OnDestroy {
       this.route.snapshot.params['id']
     );
 
-    this.userSubscription = this.authService.userSubject.subscribe(
+    this.userSubscription = this.authService.currentUser.subscribe(
       (user) => {
         this.user = user;
-        this.authService.emitUser();
       }
     );
   }

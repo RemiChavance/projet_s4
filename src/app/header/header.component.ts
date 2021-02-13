@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.userSubscription = this.authService.userSubject.subscribe(
+    this.userSubscription = this.authService.currentUser.subscribe(
       (user: User) => {
         this.user = user;
       }
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if(user) {
           this.authService.getUser(user.uid).then(
             (data: User) => {
-              this.authService.userSubject.next(data);
+              this.authService.changeUser(data);
             }
           );
         }

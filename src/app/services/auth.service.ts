@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -8,17 +8,13 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
-  user: User;
-  userSubject = new Subject<User>();
+  private userSubject = new BehaviorSubject<User>(null);
+  currentUser = this.userSubject.asObservable();
 
   constructor() { }
 
-  /**
-   * Call this fonction when user is changed
-   */
-  emitUser() {
-    this.userSubject.next(this.user);
-    console.log(this.user);
+  changeUser(user: User) {
+    this.userSubject.next(user);
   }
 
   /**
@@ -32,19 +28,19 @@ export class AuthService {
       (resolve, reject) => {
         firebase.default.auth().createUserWithEmailAndPassword(email, password).then(
           () => {
-            this.user = new User(
+            let user = new User(
               firebase.default.auth().currentUser.uid
             );
-            this.user.email = email;
-            this.user.name = name;
+            user.email = email;
+            user.name = name;
             //-- A replacer par les valeurs du formulaire --
             //   auth/signup par la suite
-            this.user.nbComments = 5;
-            this.user.rates = [1, 5 , 3];
-            this.user.groups = [];
+            user.nbComments = 5;
+            user.rates = [1, 5 , 3];
+            user.groups = [];
             //----------------------------------------------
-            firebase.default.database().ref('/user/' + this.user.id).set(this.user);
-            this.emitUser();
+            firebase.default.database().ref('/user/' + user.id).set(user);
+            this.changeUser(user);
             resolve();
           },
           (error) => {
@@ -65,13 +61,12 @@ export class AuthService {
       (resolve, reject) => {
         firebase.default.auth().signInWithEmailAndPassword(email, password).then(
           () => {
-            this.user = new User(
+            let user = new User(
               firebase.default.auth().currentUser.uid
             );
-            this.getUser(this.user.id).then(
-              (user: User) => {
-                this.user = user;
-                this.emitUser();
+            this.getUser(user.id).then(
+              (userData: User) => {
+                this.changeUser(userData);
               }
             );
             resolve();
@@ -89,8 +84,7 @@ export class AuthService {
    */
   signOutUser() {
     firebase.default.auth().signOut();
-    this.user = null;
-    this.emitUser();
+    this.changeUser(null);
   }
 
   /**
