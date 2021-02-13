@@ -23,6 +23,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AdminGroupComponent } from './group/admin-group/admin-group.component';
 import { GroupAdminGuardService } from './services/group-admin-guard.service';
 import { GroupAdminService } from './services/group-admin.service';
+import { RecipeComponent } from './recipe/recipe.component';
+import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
+import { ListGroupComponent } from './group/list-group/list-group.component';
 
 
 const appRoutes: Routes = [
@@ -45,7 +48,10 @@ const appRoutes: Routes = [
     HomeComponent,
     CreateGroupComponent,
     GroupComponent,
-    AdminGroupComponent
+    AdminGroupComponent,
+    RecipeComponent,
+    CreateRecipeComponent,
+    ListGroupComponent
   ],
   imports: [
     BrowserModule,
