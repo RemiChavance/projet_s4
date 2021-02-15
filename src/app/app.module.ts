@@ -26,6 +26,8 @@ import { GroupAdminService } from './services/group-admin.service';
 import { RecipeComponent } from './recipe/recipe.component';
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { ListGroupComponent } from './group/list-group/list-group.component';
+import { CommentComponent } from './comment/comment.component';
+import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 
 
 const appRoutes: Routes = [
@@ -53,7 +55,9 @@ const appRoutes: Routes = [
     AdminGroupComponent,
     RecipeComponent,
     CreateRecipeComponent,
-    ListGroupComponent
+    ListGroupComponent,
+    CommentComponent,
+    CreateCommentComponent
   ],
   imports: [
     BrowserModule,

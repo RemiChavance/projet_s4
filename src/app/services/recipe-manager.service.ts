@@ -16,7 +16,7 @@ export class RecipeManagerService {
     return new Promise<Recipe>(
       (resolve, reject) => {
         firebase.default.database()
-          .ref("/group/" + idGroup + "/recipes/" + (idRecipe-1))
+          .ref("/group/" + idGroup + "/recipes/" + idRecipe)
           .once("value")
           .then(
             (recipe) => {

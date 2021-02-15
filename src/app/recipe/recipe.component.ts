@@ -12,6 +12,8 @@ export class RecipeComponent implements OnInit {
 
   recipe: Recipe;
 
+  // Plus tard : récupérer le groupe uniquement, puis prendre la recette en fonction du param URL
+
   constructor(private route: ActivatedRoute,
               private recipeManager: RecipeManagerService) { }
 
@@ -24,8 +26,6 @@ export class RecipeComponent implements OnInit {
         this.recipe = recipe;
       }
     )
-
-    this.recipeManager.getNextId(this.route.snapshot.params["id"]);
   }
 
 }
