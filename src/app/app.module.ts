@@ -35,6 +35,8 @@ const appRoutes: Routes = [
   { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
   { path: 'group/:id', component: GroupComponent },
   { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
+  { path: 'group/:id/recipe/:idRecipe', component: RecipeComponent },
+  { path: 'group/:id/create-recipe', component: CreateRecipeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
