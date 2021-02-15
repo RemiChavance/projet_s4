@@ -1,1 +1,79 @@
-<p>create-recipe works!</p>
+<h1>Créer une recette</h1>
+
+
+<mat-vertical-stepper [linear]="false" #stepper>
+    <mat-step [stepControl]="titleFormGroup">
+      <form [formGroup]="titleFormGroup">
+        <ng-template matStepLabel>Nom de la recette</ng-template>
+        <mat-form-field>
+          <mat-label>Titre</mat-label>
+          <input matInput placeholder="Tarte à la fraise" formControlName="title" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="prepTimeFormGroup">
+      <form [formGroup]="prepTimeFormGroup">
+        <ng-template matStepLabel>Temps de préparation</ng-template>
+        <mat-form-field>
+          <mat-label>Temps en minutes</mat-label>
+          <input matInput formControlName="prepTime" placeholder="Ex. 30" type="number"
+                 required>
+        </mat-form-field>
+        <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="totalTimeFormGroup">
+        <form [formGroup]="totalTimeFormGroup">
+          <ng-template matStepLabel>Temps total</ng-template>
+          <mat-form-field>
+            <mat-label>Temps en minutes</mat-label>
+            <input matInput formControlName="totalTime" placeholder="Ex. 60" type="number"
+                   required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="ingredientsFormGroup">
+        <form [formGroup]="ingredientsFormGroup">
+          <ng-template matStepLabel>Ingrédients</ng-template>
+            <p>tab avec colonne "Ingrédient" et "Quantité",
+                boutton ajouter une ligne,
+                boutton supprimer ligne en fin de ligne,
+                input pour les colonnes
+            </p>
+          <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="stepsFormGroup">
+        <form [formGroup]="stepsFormGroup">
+          <ng-template matStepLabel>Etapes</ng-template>
+            <p>boutton ajouter une étape, 1 input par étape
+            </p>
+          <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Terminer</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Récapitulatif</ng-template>
+      <p>afficher un récap. de la recette</p>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button (click)="stepper.reset()">Envoyer</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  

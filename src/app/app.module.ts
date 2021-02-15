@@ -26,6 +26,7 @@ import { GroupAdminService } from './services/group-admin.service';
 import { RecipeComponent } from './recipe/recipe.component';
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { ListGroupComponent } from './group/list-group/list-group.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 const appRoutes: Routes = [
@@ -35,6 +36,8 @@ const appRoutes: Routes = [
   { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
   { path: 'group/:id', component: GroupComponent },
   { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
+  { path: 'group/:id/recipe/create-recipe', canActivate: [AuthGuardService], component: CreateRecipeComponent },
+  { path: 'group/:id/recipe/:id', component: RecipeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
@@ -63,7 +66,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule
   ],
   providers: [
     AuthService,

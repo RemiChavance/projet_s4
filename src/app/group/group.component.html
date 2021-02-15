@@ -1,5 +1,10 @@
 <p>Le nom du groupe :</p>
 <p> {{ group.name }}</p>
+<p>
+    <button mat-mini-fab color="primary" aria-label="add recipe" (click)="createRecipe()">
+    <mat-icon>add</mat-icon>
+    </button>
+</p>
 
 <p *ngIf="nonExistentGroup">Ce groupe n'existe pas</p>
 

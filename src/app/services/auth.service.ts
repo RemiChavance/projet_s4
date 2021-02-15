@@ -19,8 +19,8 @@ export class AuthService {
 
   /**
    * Create a new user in base and connect him
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    * @param name
    */
   createNewUser(email: string, password: string, name: string) {
@@ -33,12 +33,12 @@ export class AuthService {
             );
             user.email = email;
             user.name = name;
-            //-- A replacer par les valeurs du formulaire --
+            // -- A replacer par les valeurs du formulaire --
             //   auth/signup par la suite
             user.nbComments = 5;
             user.rates = [1, 5 , 3];
             user.groups = [];
-            //----------------------------------------------
+            // ----------------------------------------------
             firebase.default.database().ref('/user/' + user.id).set(user);
             this.changeUser(user);
             resolve();
@@ -53,8 +53,8 @@ export class AuthService {
 
   /**
    * Connect user
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    */
   signInUser(email: string, password: string) {
     return new Promise<void>(

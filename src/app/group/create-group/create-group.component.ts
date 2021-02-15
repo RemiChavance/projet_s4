@@ -51,6 +51,6 @@ export class CreateGroupComponent implements OnInit {
       (error) => {
         this.errorMessage = error;
       }
-    );    
+    );
   }
 }
