@@ -26,7 +26,12 @@ import { GroupAdminService } from './services/group-admin.service';
 import { RecipeComponent } from './recipe/recipe.component';
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { ListGroupComponent } from './group/list-group/list-group.component';
+
 import { MatStepperModule } from '@angular/material/stepper';
+
+import { CommentComponent } from './comment/comment.component';
+import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
+import { RecipeManagerService } from './services/recipe-manager.service';
 
 
 const appRoutes: Routes = [
@@ -36,8 +41,8 @@ const appRoutes: Routes = [
   { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
   { path: 'group/:id', component: GroupComponent },
   { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
-  { path: 'group/:id/recipe/create-recipe', canActivate: [AuthGuardService], component: CreateRecipeComponent },
-  { path: 'group/:id/recipe/:id', component: RecipeComponent },
+  { path: 'group/:id/recipe/:idRecipe', component: RecipeComponent },
+  { path: 'group/:id/create-recipe', component: CreateRecipeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
@@ -54,7 +59,9 @@ const appRoutes: Routes = [
     AdminGroupComponent,
     RecipeComponent,
     CreateRecipeComponent,
-    ListGroupComponent
+    ListGroupComponent,
+    CommentComponent,
+    CreateCommentComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,8 @@ const appRoutes: Routes = [
     GroupCreationService,
     GroupManagerService,
     GroupAdminGuardService,
-    GroupAdminService
+    GroupAdminService,
+    RecipeManagerService
   ],
   bootstrap: [AppComponent]
 })

@@ -58,6 +58,11 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
 
+  onClickAddRecipe() {
+    this.router.navigate(['/group', this.group.idGroup, 'create-recipe']);
+  }
+
+
   ngOnDestroy() {
     this.groupSubscription.unsubscribe();
     this.userSubscription.unsubscribe();

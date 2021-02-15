@@ -3,6 +3,8 @@ import * as firebase from 'firebase';
 import { Group } from '../models/group.model';
 import { User } from '../models/user.model';
 
+import { Recipe } from '../models/recipe.model';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -20,6 +22,7 @@ export class GroupCreationService {
                         newGroup.requests = [];
                         newGroup.stats = [];
                         newGroup.recipes = [];
+                        newGroup.recipes.push(new Recipe(0, 'Gateau', 'Gateau trop bon', 'authorId', [], []));
                         // Create new group
                         firebase.default.database().ref('/group/nextGroupId').set(nextGroupId + 1);
                         firebase.default.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
