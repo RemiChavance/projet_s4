@@ -10,10 +10,11 @@ import { User } from '../models/user.model';
 export class RecipeCreationService {
 
   group: Group;
+  recipe: Recipe;
 
   constructor() {}
 
-  createNewRecipe(title: string, prepTime: number, totalTime: number, ingredients: JSON, steps: string, author: string) {
+  createNewRecipe(title: string, prepTime: number, totalTime: number, ingredients: string, steps: string, author: string) {
     return new Promise<number>(
     (resolve, reject) => {
       const newRecipe: Recipe = new Recipe(title, prepTime, totalTime, ingredients, steps, author);

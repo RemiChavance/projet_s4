@@ -67,9 +67,4 @@ export class GroupComponent implements OnInit, OnDestroy {
     this.groupSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
-
-  createRecipe() {
-    this.router.navigate(['/group/', this.group.idGroup, '/recipe/create-recipe']);
-  }
-
 }

@@ -32,6 +32,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { CommentComponent } from './comment/comment.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 import { RecipeManagerService } from './services/recipe-manager.service';
+import { ListRecipeComponent } from './recipe/list-recipe/list-recipe.component';
 
 
 const appRoutes: Routes = [
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     CreateRecipeComponent,
     ListGroupComponent,
     CommentComponent,
-    CreateCommentComponent
+    CreateCommentComponent,
+    ListRecipeComponent
   ],
   imports: [
     BrowserModule,

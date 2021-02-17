@@ -45,11 +45,7 @@
       <mat-step [stepControl]="ingredientsFormGroup">
         <form [formGroup]="ingredientsFormGroup">
           <ng-template matStepLabel>Ingrédients</ng-template>
-            <p>tab avec colonne "Ingrédient" et "Quantité",
-                boutton ajouter une ligne,
-                boutton supprimer ligne en fin de ligne,
-                input pour les colonnes
-            </p>
+            <input matInput placeholder="Ingrédients" formControlName="ingredients" required> 
           <div>
             <button mat-button matStepperPrevious>Retour</button>
             <button mat-button matStepperNext>Suivant</button>
@@ -59,8 +55,7 @@
       <mat-step [stepControl]="stepsFormGroup">
         <form [formGroup]="stepsFormGroup">
           <ng-template matStepLabel>Etapes</ng-template>
-            <p>boutton ajouter une étape, 1 input par étape
-            </p>
+            <input matInput placeholder="Ingrédients" formControlName="steps" required> 
           <div>
             <button mat-button matStepperPrevious>Retour</button>
             <button mat-button matStepperNext>Terminer</button>
@@ -72,7 +67,7 @@
       <p>afficher un récap. de la recette</p>
       <div>
         <button mat-button matStepperPrevious>Retour</button>
-        <button mat-button (click)="stepper.reset()">Envoyer</button>
+        <button mat-button (click)="onSubmit()">Envoyer</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

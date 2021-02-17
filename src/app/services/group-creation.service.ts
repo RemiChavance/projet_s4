@@ -22,7 +22,6 @@ export class GroupCreationService {
                         newGroup.requests = [];
                         newGroup.stats = [];
                         newGroup.recipes = [];
-                        newGroup.recipes.push(new Recipe(0, 'Gateau', 'Gateau trop bon', 'authorId', [], []));
                         // Create new group
                         firebase.default.database().ref('/group/nextGroupId').set(nextGroupId + 1);
                         firebase.default.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(

@@ -2,6 +2,8 @@
   import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   import { Router } from '@angular/router';
   import { Subscription } from 'rxjs';
+  import { Group } from 'src/app/models/group.model';
+  import { Recipe } from 'src/app/models/recipe.model';
   import { User } from 'src/app/models/user.model';
   import { AuthService } from 'src/app/services/auth.service';
   import { RecipeCreationService } from 'src/app/services/recipe-creation.service';
@@ -25,6 +27,9 @@
     stepsFormGroup: FormGroup;
 
     errorMessage: string;
+
+    group: Group;
+    recipe: Recipe;
 
     user: User;
     userSubscription: Subscription;
@@ -62,6 +67,7 @@
     }
 
     onSubmit() {
+      console.log('envoye');
       const title = this.titleFormGroup.get('title').value;
       const prepTime = this.prepTimeFormGroup.get('prepTime').value;
       const totalTime = this.totalTimeFormGroup.get('totalTime').value;
@@ -72,8 +78,8 @@
       // console.log(this.user);
 
       this.recipeCreationService.createNewRecipe(title, prepTime, totalTime, ingredients, steps, author.id).then(
-        (id) => {
-          this.router.navigate(['group/', id, '/recipe/:', id]);
+        () => {
+          this.router.navigate(['group/', this.group.idGroup, '/recipe/', this.recipe.idRecipe]);
         },
         (error) => {
           this.errorMessage = error;
