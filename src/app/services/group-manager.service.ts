@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
-import { Subject } from 'rxjs';
+import firebase from 'firebase';
 import { Group } from '../models/group.model';
 
 @Injectable({
@@ -8,30 +7,18 @@ import { Group } from '../models/group.model';
 })
 export class GroupManagerService {
 
-    group: Group;
-    groupSubject = new Subject<Group>();
-
     constructor() { }
-
-    /**
-     * Emit group
-     */
-    emitGroup() {
-        this.groupSubject.next(this.group);
-    }
 
     /**
      * return Groupe by id
      * @param id
      */
     getGroupeById(id: number) {
-        return new Promise<void>(
+        return new Promise<Group>(
             (resolve, reject) => {
-                firebase.default.database().ref('/group/' + id).once('value').then(
+                firebase.database().ref('/group/' + id).once('value').then(
                     (data) => {
-                        this.group = data.val();
-                        this.emitGroup();
-                        resolve();
+                        resolve(data.val());
                     }, (error) => {
                         reject(error);
                     }
@@ -46,7 +33,7 @@ export class GroupManagerService {
     getAllGroups() {
         return new Promise<Group[]>(
             (resolve, reject) => {
-                firebase.default.database().ref('/group/').once('value').then(
+                firebase.database().ref('/group/').once('value').then(
                     (data) => {
                         let dataArray = new Array<Group>();
                         let dataVal = data.val();
