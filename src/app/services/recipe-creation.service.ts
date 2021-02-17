@@ -14,23 +14,20 @@ export class RecipeCreationService {
 
   constructor() {}
 
-  createNewRecipe(title: string, prepTime: number, totalTime: number, ingredients: string, steps: string, author: string) {
+  createNewRecipe(title: string, prepTime: number, totalTime: number, ingredients: string, steps: string, author: string, idGroup: number) {
     return new Promise<number>(
     (resolve, reject) => {
-      const newRecipe: Recipe = new Recipe(title, prepTime, totalTime, ingredients, steps, author);
-      this.getNextId().then( // Get next Id to assign it to the new group
+      this.getNextId(idGroup).then( // Get next Id to assign it to the new group
           (nextRecipeId) => {
-              newRecipe.idRecipe = nextRecipeId;
+              const newRecipe: Recipe = new Recipe(nextRecipeId, title, prepTime, totalTime, ingredients, steps, author);
               newRecipe.rates = [];
               newRecipe.comments = [];
               // Create new recipe
-              firebase.default.database().ref('group/' + this.group.idGroup + '/recipe/nextRecipeId').set(nextRecipeId + 1);
-              firebase.default.database().ref('group/' + this.group.idGroup + '/recipe/' + newRecipe.idRecipe).set(newRecipe).then(
+              firebase.default.database().ref('group/' + idGroup + '/recipes/' + newRecipe.idRecipe).set(newRecipe).then(
                   () => {
                       resolve(newRecipe.idRecipe);
                   }
               );
-
           }, (error) => {
               reject(error);
           }
@@ -39,21 +36,29 @@ export class RecipeCreationService {
     );
   }
 
-  getNextId() {
+  /**
+   * Return next idRecipe available in a group
+   */
+  getNextId(idGroup: number) {
     return new Promise<number>(
-        (resolve, reject) => {
-            firebase.default.database().ref('group/' + this.group.idGroup + 'recipe/nextRecipeId')
-                .once('value')
-                .then(
-                (data) => {
-                    const lastRecipe = data.val()[0];
-                    console.log(lastRecipe.idRecipe + 1);
-                    resolve(lastRecipe.idRecipe + 1);
-                }, (error) => {
-                    reject(error);
-                }
-            );
-        }
+      (resolve, reject) => {
+        firebase.default.database()
+          .ref('/group/' + idGroup + '/recipes')
+          .orderByKey()
+          .limitToLast(1)
+          .once('value')
+          .then(
+            (data) => {
+              if(data.val()) {
+                console.log(data);
+                const lastRecipe = data.toJSON();
+                resolve(0);
+              } else {
+                resolve(0);
+              }
+            }
+          );
+      }
     );
   }
 }
