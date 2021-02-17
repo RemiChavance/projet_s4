@@ -28,6 +28,7 @@ import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.comp
 import { ListGroupComponent } from './group/list-group/list-group.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
+import { RecipeManagerService } from './services/recipe-manager.service';
 
 
 const appRoutes: Routes = [
@@ -77,7 +78,8 @@ const appRoutes: Routes = [
     GroupCreationService,
     GroupManagerService,
     GroupAdminGuardService,
-    GroupAdminService
+    GroupAdminService,
+    RecipeManagerService
   ],
   bootstrap: [AppComponent]
 })

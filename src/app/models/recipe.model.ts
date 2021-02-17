@@ -6,7 +6,7 @@ export class Recipe {
         public title: string,
         public description: string, // a remplacer par d'autre attributs par la suite --> liste des ingrédients, étapes de préparation, etc ...
         public authorId: string,
-        public rates: number[],
-        public comments: Comment[]        
+        public rates?: number[],
+        public comments?: Comment[]        
     ) { }
 }

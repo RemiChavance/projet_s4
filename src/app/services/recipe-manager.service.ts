@@ -33,17 +33,39 @@ export class RecipeManagerService {
    * Return next idRecipe available in a group
    */
   getNextId(idGroup: number) {
-    return new Promise(
+    return new Promise<number>(
       (resolve, reject) => {
         firebase.default.database()
           .ref("/group/" + idGroup + "/recipes/").orderByKey().limitToLast(1).once('value')
           .then(
             (data) => {
               const lastRecipe = data.val()[0];              
-              console.log(lastRecipe.idRecipe + 1);
-              
+              resolve(lastRecipe.idRecipe + 1);
             }
           )
+      }
+    );
+  }
+
+
+  /**
+   * Post new Recipe on database, then return it's ID
+   */
+  postRecipe(title: string, authorId: string, description: string, idGroup: number) {
+    return new Promise<number>(
+      (resolve, reject) => {
+        this.getNextId(idGroup).then(
+          (nextRecipeId) => {
+            let newRecipe = new Recipe(nextRecipeId, title, description, authorId);
+            newRecipe.rates = [];
+            newRecipe.comments = [];
+            firebase.default.database().ref('/group/' + idGroup + '/recipes/' + nextRecipeId).set(newRecipe).then(
+              () => {
+                resolve(nextRecipeId);
+              }
+            );
+          }
+        )
       }
     );
   }
