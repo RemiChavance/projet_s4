@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { Group } from '../models/group.model';
 import { Recipe } from '../models/recipe.model';
-import { User } from '../models/user.model';
+import DataSnapshot = firebase.database.DataSnapshot;
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class RecipeCreationService {
               newRecipe.rates = [];
               newRecipe.comments = [];
               // Create new recipe
-              firebase.default.database().ref('group/' + idGroup + '/recipes/' + newRecipe.idRecipe).set(newRecipe).then(
+              firebase.database().ref('group/' + idGroup + '/recipes/' + newRecipe.idRecipe).set(newRecipe).then(
                   () => {
                       resolve(newRecipe.idRecipe);
                   }
@@ -42,18 +42,20 @@ export class RecipeCreationService {
   getNextId(idGroup: number) {
     return new Promise<number>(
       (resolve, reject) => {
-        firebase.default.database()
+        firebase.database()
           .ref('/group/' + idGroup + '/recipes')
           .orderByKey()
           .limitToLast(1)
           .once('value')
           .then(
-            (data) => {
+            (data: DataSnapshot) => {
               if(data.val()) {
-                console.log(data);
-                const lastRecipe = data.toJSON();                
-                console.log(lastRecipe);            
-                resolve(0);
+                let lastRecipe: Recipe;
+                let dataVal = data.val();
+                for(let key in dataVal) {
+                  lastRecipe = dataVal[key];
+                }            
+                resolve(lastRecipe.idRecipe + 1);
               } else {
                 resolve(0);
               }
