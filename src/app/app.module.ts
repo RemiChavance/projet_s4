@@ -29,6 +29,7 @@ import { ListGroupComponent } from './group/list-group/list-group.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 import { RecipeManagerService } from './services/recipe-manager.service';
+import { CommentCreationService } from './services/comment-creation.service';
 
 
 const appRoutes: Routes = [
@@ -79,7 +80,8 @@ const appRoutes: Routes = [
     GroupManagerService,
     GroupAdminGuardService,
     GroupAdminService,
-    RecipeManagerService
+    RecipeManagerService,
+    CommentCreationService
   ],
   bootstrap: [AppComponent]
 })
