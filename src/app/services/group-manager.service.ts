@@ -35,7 +35,7 @@ export class GroupManagerService {
                     }, (error) => {
                         reject(error);
                     }
-                )
+                );
             }
         );
     }

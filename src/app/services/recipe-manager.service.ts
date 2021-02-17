@@ -22,8 +22,7 @@ export class RecipeManagerService {
             (recipe) => {
               resolve(recipe.val());
             }
-
-        );
+          );
       }
     );
   }
@@ -36,11 +35,11 @@ export class RecipeManagerService {
     return new Promise<number>(
       (resolve, reject) => {
         firebase.default.database()
-          .ref('/group/' + idGroup + '/recipe/').orderByKey().limitToLast(1).once('value')
+          .ref('/group/' + idGroup + '/recipes/').orderByKey().limitToLast(1).once('value')
           .then(
             (data) => {
 
-              const lastRecipe = data.val()[0];              
+              const lastRecipe = data.val()[0];
               resolve(lastRecipe.idRecipe + 1);
 
             }
