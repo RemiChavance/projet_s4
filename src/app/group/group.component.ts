@@ -37,11 +37,11 @@ export class GroupComponent implements OnInit, OnDestroy {
         } else {
           this.nonExistentGroup = true;
         }
-        
+
       }
     );
     this.groupManagerService.getGroupeById(
-      this.route.snapshot.params['id']
+      this.route.snapshot.params.id
     );
 
     this.userSubscription = this.authService.currentUser.subscribe(
@@ -67,5 +67,4 @@ export class GroupComponent implements OnInit, OnDestroy {
     this.groupSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
-
 }

@@ -26,10 +26,14 @@ import { GroupAdminService } from './services/group-admin.service';
 import { RecipeComponent } from './recipe/recipe.component';
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { ListGroupComponent } from './group/list-group/list-group.component';
+
+import { MatStepperModule } from '@angular/material/stepper';
+
 import { CommentComponent } from './comment/comment.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 import { RecipeManagerService } from './services/recipe-manager.service';
 import { CommentCreationService } from './services/comment-creation.service';
+import { ListRecipeComponent } from './recipe/list-recipe/list-recipe.component';
 
 
 const appRoutes: Routes = [
@@ -59,7 +63,8 @@ const appRoutes: Routes = [
     CreateRecipeComponent,
     ListGroupComponent,
     CommentComponent,
-    CreateCommentComponent
+    CreateCommentComponent,
+    ListRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +76,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule
   ],
   providers: [
     AuthService,

@@ -1,4 +1,4 @@
-import { Group } from "./group.model";
+import { Group } from './group.model';
 
 export class User {
     constructor(

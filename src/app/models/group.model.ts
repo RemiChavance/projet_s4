@@ -1,6 +1,6 @@
-import { Recipe } from "./recipe.model";
-import { Stat } from "./stat.model";
-import { User } from "./user.model";
+import { Recipe } from './recipe.model';
+import { Stat } from './stat.model';
+import { User } from './user.model';
 
 export class Group {
     constructor(
