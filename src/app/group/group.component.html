@@ -1,0 +1,33 @@
+<p>Le nom du groupe :</p>
+<p> {{ group.name }}</p>
+
+<p *ngIf="nonExistentGroup">Ce groupe n'existe pas</p>
+
+
+<p *ngIf="user != null && group.adminId == user.id">
+    <button mat-flat-button
+            color="warn"
+            (click)="accessAdminPage()"
+    >Page Admin</button>
+</p>
+
+
+<ul *ngIf="group.recipes">
+
+    <li *ngFor="let recipe of group.recipes">
+
+        <a routerLink="/group/{{group.idGroup}}/recipe/{{recipe.idRecipe}}"> {{ recipe.title }} </a>
+
+    </li>
+
+</ul>
+
+
+<p>Ajouter une recette</p>
+<button
+    (click)="onClickAddRecipe()"
+    mat-fab color="primary"
+    aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+</button>
+

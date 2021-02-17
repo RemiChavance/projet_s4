@@ -1,0 +1,17 @@
+<p>Commenter la recette</p>
+
+<form [FormGroup]="messageCreationService" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Poster</label>
+        
+        <input type="text"
+                id="name"
+                class="form-control"
+                formControlName="name">
+    </div>
+
+<button class="btn btn-primary"
+        type="submit"
+        >
+        Envoyer message</button>
+    </form>

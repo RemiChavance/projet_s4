@@ -1,0 +1,8 @@
+mat-form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    text-align: center;
+}
