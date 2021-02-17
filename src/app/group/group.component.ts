@@ -15,7 +15,6 @@ import { GroupManagerService } from '../services/group-manager.service';
 export class GroupComponent implements OnInit, OnDestroy {
 
   group: Group;
-  groupSubscription: Subscription;
   nonExistentGroup = false;
 
   user: User;
@@ -30,7 +29,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.group = new Group('', null);
 
-    this.groupSubscription = this.groupManagerService.groupSubject.subscribe(
+    this.groupManagerService.getGroupeById(this.route.snapshot.params['id']).then(
       (group) => {
         if(group) {
           this.group = group;
@@ -64,7 +63,6 @@ export class GroupComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.groupSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 }

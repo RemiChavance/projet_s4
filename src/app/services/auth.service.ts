@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
-import { BehaviorSubject, Subject } from 'rxjs';
+import firebase from 'firebase';
+import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -26,10 +26,10 @@ export class AuthService {
   createNewUser(email: string, password: string, name: string) {
     return new Promise<void>(
       (resolve, reject) => {
-        firebase.default.auth().createUserWithEmailAndPassword(email, password).then(
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(
           () => {
             let user = new User(
-              firebase.default.auth().currentUser.uid
+              firebase.auth().currentUser.uid
             );
             user.email = email;
             user.name = name;
@@ -39,7 +39,7 @@ export class AuthService {
             user.rates = [1, 5 , 3];
             user.groups = [];
             // ----------------------------------------------
-            firebase.default.database().ref('/user/' + user.id).set(user);
+            firebase.database().ref('/user/' + user.id).set(user);
             this.changeUser(user);
             resolve();
           },
@@ -59,10 +59,10 @@ export class AuthService {
   signInUser(email: string, password: string) {
     return new Promise<void>(
       (resolve, reject) => {
-        firebase.default.auth().signInWithEmailAndPassword(email, password).then(
+        firebase.auth().signInWithEmailAndPassword(email, password).then(
           () => {
             let user = new User(
-              firebase.default.auth().currentUser.uid
+              firebase.auth().currentUser.uid
             );
             this.getUser(user.id).then(
               (userData: User) => {
@@ -83,7 +83,7 @@ export class AuthService {
    * Disconnect user
    */
   signOutUser() {
-    firebase.default.auth().signOut();
+    firebase.auth().signOut();
     this.changeUser(null);
   }
 
@@ -94,7 +94,7 @@ export class AuthService {
   getUser(id: string) {
     return new Promise(
       (resolve, reject) => {
-        firebase.default.database().ref('/user/' + id).once('value').then(
+        firebase.database().ref('/user/' + id).once('value').then(
           (data) => {
             resolve(data.val());
           }, (error) => {

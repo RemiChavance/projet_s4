@@ -20,13 +20,12 @@ export class RecipeComponent implements OnInit {
               private groupManagerService: GroupManagerService) { }
 
   ngOnInit(): void {
-    this.groupManagerService.groupSubject.subscribe(
+    this.groupManagerService.getGroupeById(this.route.snapshot.params["id"]).then(
       (group) => {
         this.group = group;
         this.recipe = this.group.recipes[this.route.snapshot.params["idRecipe"]];
       }
     );
-    this.groupManagerService.emitGroup();
   }
 
 }

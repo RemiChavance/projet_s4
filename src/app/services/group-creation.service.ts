@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { Group } from '../models/group.model';
-import { User } from '../models/user.model';
 
 import { Recipe } from '../models/recipe.model';
 
@@ -23,8 +22,8 @@ export class GroupCreationService {
                         newGroup.stats = [];
                         newGroup.recipes = [];
                         // Create new group
-                        firebase.default.database().ref('/group/nextGroupId').set(nextGroupId + 1);
-                        firebase.default.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
+                        firebase.database().ref('/group/nextGroupId').set(nextGroupId + 1);
+                        firebase.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
                             () => {
                                 resolve(newGroup.idGroup);
                             }
@@ -44,7 +43,7 @@ export class GroupCreationService {
     getNextId() {
         return new Promise<number>(
             (resolve, reject) => {
-                firebase.default.database().ref('/group/nextGroupId')
+                firebase.database().ref('/group/nextGroupId')
                     .once('value')
                     .then(
                     (data) => {

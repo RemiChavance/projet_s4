@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { Comment } from '../models/comment.model';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class CommentCreationService {
         this.getNextId(idGroup, idRecipe).then(
           (nextCommentId) => {
             let newComment = new Comment(nextCommentId, description, idAuthor);
-            firebase.default.database()
+            firebase.database()
               .ref("/group/" + idGroup + "/recipes/" + idRecipe + "/comments/" + nextCommentId).set(newComment)
               .then(
                 () => {
@@ -44,7 +44,7 @@ export class CommentCreationService {
   getNextId(idGroup: number, idRecipe: number) {
     return new Promise<number>(
       (resolve, reject) => {
-          firebase.default.database()
+          firebase.database()
             .ref("/group/" + idGroup + "/recipes/" + idRecipe + "/comments/")
             .orderByKey()
             .limitToLast(1)
@@ -52,7 +52,11 @@ export class CommentCreationService {
             .then(
               (data) => {
                 if(data.val()) {
-                  const lastComment = data.val()[0];
+                  let lastComment: Comment;
+                  let dataVal = data.val();
+                  for(let key in dataVal) {
+                    lastComment = dataVal[key];
+                  }
                   resolve(lastComment.idComment + 1);
                 } else {
                   resolve(0);

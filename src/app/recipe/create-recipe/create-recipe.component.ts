@@ -29,7 +29,6 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
 
     errorMessage: string;
 
-    group: Group;
     recipe: Recipe;
 
     user: User;
@@ -48,15 +47,7 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
         (user: User) => {
           this.user = user;
         }
-      );
-      this.groupManagerService.groupSubject.subscribe(
-        (group) => {
-          console.log(group);
-          this.group = group;
-        }
-      );
-      this.groupManagerService.emitGroup();
-      
+      );      
     }
 
     initForm() {
@@ -86,8 +77,6 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
       const steps = this.stepsFormGroup.get('steps').value;
       const author = this.user;
 
-      // console.log(this.user);
-      //console.log(this.group.idGroup);
       this.recipeCreationService.createNewRecipe(title, prepTime, totalTime, ingredients, steps, author.id, this.route.snapshot.params['id']).then(
         (newRecipeId) => {
           this.router.navigate(['/group', this.route.snapshot.params['id'], 'recipe', newRecipeId]);
