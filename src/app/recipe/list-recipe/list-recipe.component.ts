@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/models/group.model';
 import { Recipe } from 'src/app/models/recipe.model';
@@ -12,7 +12,7 @@ import { RecipeManagerService } from 'src/app/services/recipe-manager.service';
 })
 export class ListRecipeComponent implements OnInit {
 
-  recipes: Recipe[] = [];
+  @Input() recipes: Recipe[];
   group: Group;
   recipe: Recipe;
 
@@ -23,19 +23,6 @@ export class ListRecipeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.recipeManagerService.getAllRecipesFromGroup(this.route.snapshot.params.id).then(
-      (data) => {
-        this.recipes = data;
-      }
-    );
-    this.groupManagerService.getGroupeById(this.route.snapshot.params.id).then(
-      (group) => {
-        this.group = group;
-        if (group.recipes) {
-          this.recipe = this.group.recipes[this.route.snapshot.params.idRecipe];
-        }
-      }
-    );
   }
 
 }
