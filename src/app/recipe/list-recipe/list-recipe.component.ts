@@ -9,6 +9,14 @@ export class ListRecipeComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * 
+   * 
+   * composant un peu inutile pour l'instant
+   *  
+   * 
+  **/
+
   ngOnInit(): void {
   }
 

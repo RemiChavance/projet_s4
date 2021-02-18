@@ -1,12 +1,10 @@
-  import {Component, OnInit} from '@angular/core';
+  import {Component, OnDestroy, OnInit} from '@angular/core';
   import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   import { ActivatedRoute, Router } from '@angular/router';
   import { Subscription } from 'rxjs';
-  import { Group } from 'src/app/models/group.model';
   import { Recipe } from 'src/app/models/recipe.model';
   import { User } from 'src/app/models/user.model';
   import { AuthService } from 'src/app/services/auth.service';
-import { GroupManagerService } from 'src/app/services/group-manager.service';
   import { RecipeCreationService } from 'src/app/services/recipe-creation.service';
 
   /**
@@ -17,7 +15,7 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
   templateUrl: './create-recipe.component.html',
   styleUrls: ['./create-recipe.component.css']
   })
-  export class CreateRecipeComponent implements OnInit {
+  export class CreateRecipeComponent implements OnInit, OnDestroy {
 
     isLinear = false;
 
@@ -38,7 +36,6 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
                 private recipeCreationService: RecipeCreationService,
                 private router: Router,
                 private authService: AuthService,
-                private groupManagerService: GroupManagerService,
                 private route: ActivatedRoute) { }
 
     ngOnInit(): void {
@@ -85,5 +82,9 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
           this.errorMessage = error;
         }
       );
+    }
+
+    ngOnDestroy() {
+      this.userSubscription.unsubscribe();
     }
   }

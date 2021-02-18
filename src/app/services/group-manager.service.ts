@@ -8,18 +8,30 @@ import { Group } from '../models/group.model';
 })
 export class GroupManagerService {
 
+    private groupSubject = new BehaviorSubject<Group>(null);
+    currentGroup = this.groupSubject.asObservable();
+
     constructor() { }
+
+    changeGroup(group: Group) {
+        this.groupSubject.next(group);
+    }
+
+    refreshGroup() {
+        this.getGroupeById(this.groupSubject.value.idGroup);
+    }
 
     /**
      * return Groupe by id
      * @param id
      */
     getGroupeById(id: number) {
-        return new Promise<Group>(
+        return new Promise<void>(
             (resolve, reject) => {
                 firebase.database().ref('/group/' + id).once('value').then(
                     (data) => {
-                        resolve(data.val());
+                        this.changeGroup(data?.val());
+                        resolve();
                     }, (error) => {
                         reject(error);
                     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { GroupCreationService } from 'src/app/services/group-creation.service';
   templateUrl: './create-group.component.html',
   styleUrls: ['./create-group.component.css']
 })
-export class CreateGroupComponent implements OnInit {
+export class CreateGroupComponent implements OnInit, OnDestroy {
 
   createGroupForm: FormGroup;
   errorMessage: string;
@@ -52,5 +52,9 @@ export class CreateGroupComponent implements OnInit {
         this.errorMessage = error;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 }

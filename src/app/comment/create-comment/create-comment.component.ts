@@ -1,16 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentCreationService } from 'src/app/services/comment-creation.service';
+import { GroupManagerService } from 'src/app/services/group-manager.service';
 
 @Component({
   selector: 'app-create-comment',
   templateUrl: './create-comment.component.html',
   styleUrls: ['./create-comment.component.css']
 })
-export class CreateCommentComponent implements OnInit {
+export class CreateCommentComponent implements OnInit, OnDestroy {
 
   
   @Input() idRecipe: number;
@@ -23,7 +24,8 @@ export class CreateCommentComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private commentCreationService: CommentCreationService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private groupManagerService: GroupManagerService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -45,9 +47,14 @@ export class CreateCommentComponent implements OnInit {
 
     this.commentCreationService.createNewComment(comment, this.user.id, this.idGroup, this.idRecipe).then(
       () => {
-        console.log("posté");
+        this.groupManagerService.refreshGroup();
+        this.createCommentForm.reset();
       }
     )
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
 }

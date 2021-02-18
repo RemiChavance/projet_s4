@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import firebase from 'firebase';
 import { Group } from '../models/group.model';
 
-import { Recipe } from '../models/recipe.model';
-
 @Injectable({
     providedIn: 'root'
 })

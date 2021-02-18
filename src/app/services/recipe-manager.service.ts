@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class RecipeManagerService {
   getRecipe(idGroup: number, idRecipe: number) {
     return new Promise<Recipe>(
       (resolve, reject) => {
-        firebase.default.database()
+        firebase.database()
           .ref('/group/' + idGroup + '/recipe/' + idRecipe)
           .once('value')
           .then(

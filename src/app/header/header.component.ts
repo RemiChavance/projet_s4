@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     );
 
     // Vérification de la connection
-    firebase.default.auth().onAuthStateChanged(
+    firebase.auth().onAuthStateChanged(
       (user) => {
         if(user) {
           this.authService.getUser(user.uid).then(
