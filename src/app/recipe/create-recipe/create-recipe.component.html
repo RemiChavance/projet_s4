@@ -82,7 +82,7 @@
       <mat-step [stepControl]="descripFormGroup">
         <form [formGroup]="descripFormGroup">
           <ng-template matStepLabel>Description</ng-template>
-            <input matInput placeholder="Description de la recette..." formControlName="description" required> 
+            <textarea matInput placeholder="Description de la recette..." formControlName="description" required></textarea>
           <div>
             <button mat-button matStepperPrevious>Retour</button>
             <button mat-button matStepperNext>Suivant</button>
