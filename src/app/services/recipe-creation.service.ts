@@ -14,12 +14,12 @@ export class RecipeCreationService {
 
   constructor() {}
 
-  createNewRecipe(title: string, prepTime: number, totalTime: number, ingredients: string, steps: string, author: string, idGroup: number) {
+  createNewRecipe(title: string, type: string, prepTime: number, totalTime: number, ingredients: string, steps: string, description: string, author: string, idGroup: number) {
     return new Promise<number>(
     (resolve, reject) => {
       this.getNextId(idGroup).then( // Get next Id to assign it to the new group
           (nextRecipeId) => {
-              const newRecipe: Recipe = new Recipe(nextRecipeId, title, prepTime, totalTime, ingredients, steps, author);
+              const newRecipe: Recipe = new Recipe(nextRecipeId, title, type, prepTime, totalTime, ingredients, steps, description, author);
               newRecipe.rates = [];
               newRecipe.comments = [];
               // Create new recipe
@@ -49,10 +49,10 @@ export class RecipeCreationService {
           .once('value')
           .then(
             (data: DataSnapshot) => {
-              if(data.val()) {
+              if (data.val()) {
                 let lastRecipe: Recipe;
                 const dataVal = data.val();
-                for(let key in dataVal) {
+                for (let key in dataVal) {
                   lastRecipe = dataVal[key];
                 }
                 resolve(lastRecipe.idRecipe + 1);

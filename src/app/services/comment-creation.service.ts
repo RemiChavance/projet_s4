@@ -12,18 +12,18 @@ export class CommentCreationService {
   /**
    * Post comment
    * @param description
-   * @param author 
-   * @param idGroup 
-   * @param idRecipe 
+   * @param author
+   * @param idGroup
+   * @param idRecipe
    */
   createNewComment(description: string, idAuthor: string, idGroup: number, idRecipe: number) {
     return new Promise<void>(
       (resolve, reject) => {
         this.getNextId(idGroup, idRecipe).then(
           (nextCommentId) => {
-            let newComment = new Comment(nextCommentId, description, idAuthor);
+            const newComment = new Comment(nextCommentId, description, idAuthor);
             firebase.database()
-              .ref("/group/" + idGroup + "/recipes/" + idRecipe + "/comments/" + nextCommentId).set(newComment)
+              .ref('/group/' + idGroup + '/recipes/' + idRecipe + '/comments/' + nextCommentId).set(newComment)
               .then(
                 () => {
                   resolve();
@@ -32,7 +32,7 @@ export class CommentCreationService {
           }, (error) => {
             reject(error);
           }
-        )
+        );
       }
     );
   }
@@ -45,16 +45,16 @@ export class CommentCreationService {
     return new Promise<number>(
       (resolve, reject) => {
           firebase.database()
-            .ref("/group/" + idGroup + "/recipes/" + idRecipe + "/comments/")
+            .ref('/group/' + idGroup + '/recipes/' + idRecipe + '/comments/')
             .orderByKey()
             .limitToLast(1)
             .once('value')
             .then(
               (data) => {
-                if(data.val()) {
+                if (data.val()) {
                   let lastComment: Comment;
-                  let dataVal = data.val();
-                  for(let key in dataVal) {
+                  const dataVal = data.val();
+                  for (const key in dataVal) {
                     lastComment = dataVal[key];
                   }
                   resolve(lastComment.idComment + 1);
@@ -63,7 +63,7 @@ export class CommentCreationService {
                 }
               }
             );
-      } 
+      }
     );
   }
 

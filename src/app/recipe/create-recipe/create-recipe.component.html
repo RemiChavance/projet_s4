@@ -1,7 +1,7 @@
 <h1>Créer une recette</h1>
 
 
-<mat-vertical-stepper [linear]="false" #stepper>
+<mat-vertical-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="titleFormGroup">
       <form [formGroup]="titleFormGroup">
         <ng-template matStepLabel>Nom de la recette</ng-template>
@@ -11,6 +11,23 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="typeFormGroup">
+      <form [formGroup]="typeFormGroup">
+        <ng-template matStepLabel>Type de la recette</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Choisir</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{type.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
         </div>
       </form>
     </mat-step>
@@ -58,7 +75,17 @@
             <input matInput placeholder="Ingrédients" formControlName="steps" required> 
           <div>
             <button mat-button matStepperPrevious>Retour</button>
-            <button mat-button matStepperNext>Terminer</button>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="descripFormGroup">
+        <form [formGroup]="descripFormGroup">
+          <ng-template matStepLabel>Description</ng-template>
+            <input matInput placeholder="Description de la recette..." formControlName="description" required> 
+          <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
           </div>
         </form>
       </mat-step>

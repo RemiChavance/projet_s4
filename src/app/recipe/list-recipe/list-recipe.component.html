@@ -1,1 +1,12 @@
-<p>list-recipe works!</p>
+<p>Liste des recettes:</p>
+<ul ng-template *ngIf="recipes?.length; else noRecipes">
+
+    <li *ngFor="let recipe of recipes">
+
+        <a routerLink="/group/{{group.idGroup}}/recipes/{{recipe.idRecipe}}"> {{ recipe.title }} </a>
+
+    </li>
+
+</ul>
+
+<ng-template #noRecipes><p>Il n'y a pas encore de recettes.</p></ng-template>
