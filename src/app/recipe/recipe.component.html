@@ -1,13 +1,26 @@
 <div *ngIf="recipe">
 
-    <p> {{ recipe.title }} </p>
+    <br>
 
-    <p> {{ recipe.description }} </p>
+    <h4> {{ recipe.title }} </h4>
 
-    <!-- afficher le composant pour écrire un commentaire -->
+    <p> ici les infos de la recette </p>
+
+    <!-- composant pour écrire un commentaire -->
     <app-create-comment [idRecipe]="recipe.idRecipe"
                         [idGroup]="group.idGroup">
     </app-create-comment>
+
+
+    <!-- composant pour afficher les commentaires -->
+    <div *ngIf="recipe.comments">
+        <br>
+        <h4>Commentaires</h4>
+        <app-comment *ngFor="let comment of recipe.comments"
+                    [comment]="comment"
+        ></app-comment>
+    </div>
+
 
 </div>
 

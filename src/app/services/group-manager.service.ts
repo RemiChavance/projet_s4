@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import { BehaviorSubject } from 'rxjs';
 import { Group } from '../models/group.model';
 
 @Injectable({

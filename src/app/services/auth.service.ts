@@ -88,11 +88,11 @@ export class AuthService {
   }
 
   /**
-   * Get user in base by it's id
+   * Return user in base by it's id
    * @param id 
    */
   getUser(id: string) {
-    return new Promise(
+    return new Promise<User>(
       (resolve, reject) => {
         firebase.database().ref('/user/' + id).once('value').then(
           (data) => {
