@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 // custom
@@ -85,7 +87,9 @@ const appRoutes: Routes = [
     MatIconModule,
     MatStepperModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
   providers: [
     AuthService,

@@ -1,0 +1,13 @@
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+li {
+    max-width: 33%;
+    padding: 16px;
+}
+mat-card {
+    
+}

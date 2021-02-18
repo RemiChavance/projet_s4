@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li routerLinkActive="active">
@@ -26,6 +26,41 @@
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->
+
+<mat-toolbar>
+    <span routerLinkActive="active"><a routerLink="home">Accueil</a></span>
+    <span class="example-spacer"></span>
+    <div *ngIf="!user">
+        <button mat-button color="primary"><a routerLink="auth/signin">Se connecter</a></button>
+        <button mat-button color="primary"><a routerLink="auth/signup">Créer un compte</a></button>
+    </div>
+    
+
+    <div routerLinkActive="active" *ngIf="user">
+        <span *ngIf="user"> {{ user.name }}</span>
+    
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item disabled>
+                <mat-icon>article</mat-icon>
+                <span>Mes recettes</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>favorite</mat-icon>
+                <span>Favoris</span>
+            </button>
+            <button mat-menu-item type="button" (click)="onSignOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Se déconnecter</span>
+            </button>
+            </mat-menu>
+    </div>
+    
+    
+      
+  </mat-toolbar>
 
 

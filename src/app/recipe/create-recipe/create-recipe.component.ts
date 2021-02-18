@@ -27,9 +27,9 @@
   export class CreateRecipeComponent implements OnInit {
 
     types: Type[] = [
-      {value: 'entree-0', viewValue: 'Entrée'},
-      {value: 'principal-1', viewValue: 'Plat principal'},
-      {value: 'dessert-2', viewValue: 'Dessert'}
+      {value: 'Entrée', viewValue: 'Entrée'},
+      {value: 'Plat Principal', viewValue: 'Plat principal'},
+      {value: 'Dessert', viewValue: 'Dessert'}
     ];
 
     titleFormGroup: FormGroup;

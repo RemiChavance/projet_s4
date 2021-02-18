@@ -35,8 +35,8 @@
       <form [formGroup]="prepTimeFormGroup">
         <ng-template matStepLabel>Temps de préparation</ng-template>
         <mat-form-field>
-          <mat-label>Temps en minutes</mat-label>
-          <input matInput formControlName="prepTime" placeholder="Ex. 30" type="number"
+          <mat-label>Temps de préparation</mat-label>
+          <input matInput formControlName="prepTime" placeholder="Ex. 30" type="time"
                  required>
         </mat-form-field>
         <div>
@@ -49,8 +49,8 @@
         <form [formGroup]="totalTimeFormGroup">
           <ng-template matStepLabel>Temps total</ng-template>
           <mat-form-field>
-            <mat-label>Temps en minutes</mat-label>
-            <input matInput formControlName="totalTime" placeholder="Ex. 60" type="number"
+            <mat-label>Temps total</mat-label>
+            <input matInput formControlName="totalTime" placeholder="Ex. 60" type="time"
                    required>
           </mat-form-field>
           <div>
