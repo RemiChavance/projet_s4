@@ -11,23 +11,13 @@
     >Page Admin</button>
 </p>
 
-<p>Liste des recettes</p>
-<ul *ngIf="group.recipes">
-
-    <li *ngFor="let recipe of group.recipes">
-
-        <a routerLink="/group/{{group.idGroup}}/recipe/{{recipe.idRecipe}}"> {{ recipe.title }} </a>
-
-    </li>
-
-</ul>
-
+<app-list-recipe [recipes]="group.recipes" [idGroup]="group.idGroup"></app-list-recipe>
 
 <p>Ajouter une recette</p>
 <button
     (click)="onClickAddRecipe()"
     mat-fab color="primary"
-    aria-label="Example icon button with a delete icon">
+    aria-label="add-recipe-button">
     <mat-icon>add</mat-icon>
 </button>
 

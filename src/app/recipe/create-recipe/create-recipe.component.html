@@ -1,7 +1,7 @@
 <h1>Créer une recette</h1>
 
 
-<mat-vertical-stepper [linear]="false" #stepper>
+<mat-vertical-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="titleFormGroup">
       <form [formGroup]="titleFormGroup">
         <ng-template matStepLabel>Nom de la recette</ng-template>
@@ -14,12 +14,29 @@
         </div>
       </form>
     </mat-step>
+    <mat-step [stepControl]="typeFormGroup">
+      <form [formGroup]="typeFormGroup">
+        <ng-template matStepLabel>Type de la recette</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Choisir</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{type.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
     <mat-step [stepControl]="prepTimeFormGroup">
       <form [formGroup]="prepTimeFormGroup">
         <ng-template matStepLabel>Temps de préparation</ng-template>
         <mat-form-field>
-          <mat-label>Temps en minutes</mat-label>
-          <input matInput formControlName="prepTime" placeholder="Ex. 30" type="number"
+          <mat-label>Temps de préparation</mat-label>
+          <input matInput formControlName="prepTime" placeholder="Ex. 30" type="time"
                  required>
         </mat-form-field>
         <div>
@@ -32,8 +49,8 @@
         <form [formGroup]="totalTimeFormGroup">
           <ng-template matStepLabel>Temps total</ng-template>
           <mat-form-field>
-            <mat-label>Temps en minutes</mat-label>
-            <input matInput formControlName="totalTime" placeholder="Ex. 60" type="number"
+            <mat-label>Temps total</mat-label>
+            <input matInput formControlName="totalTime" placeholder="Ex. 60" type="time"
                    required>
           </mat-form-field>
           <div>
@@ -58,7 +75,17 @@
             <input matInput placeholder="Ingrédients" formControlName="steps" required> 
           <div>
             <button mat-button matStepperPrevious>Retour</button>
-            <button mat-button matStepperNext>Terminer</button>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="descripFormGroup">
+        <form [formGroup]="descripFormGroup">
+          <ng-template matStepLabel>Description</ng-template>
+            <textarea matInput placeholder="Description de la recette..." formControlName="description" required></textarea>
+          <div>
+            <button mat-button matStepperPrevious>Retour</button>
+            <button mat-button matStepperNext>Suivant</button>
           </div>
         </form>
       </mat-step>
@@ -71,4 +98,3 @@
       </div>
     </mat-step>
   </mat-vertical-stepper>
-  

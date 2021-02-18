@@ -16,16 +16,16 @@ export class GroupAdminGuardService implements CanActivate {
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise(
       (resolve, reject) => {
-        if(this.groupAdminService.user === undefined || this.groupAdminService.group === undefined) {
+        if (this.groupAdminService.user === undefined || this.groupAdminService.group === undefined) {
           this.router.navigate(['/home']);
           resolve(false);
-        } else if(this.groupAdminService.user.id == this.groupAdminService.group.adminId) {
+        } else if (this.groupAdminService.user.id === this.groupAdminService.group.adminId) {
           resolve(true);
         } else {
           this.router.navigate(['/group', this.groupAdminService.group.idGroup]);
           resolve(false);
         }
       }
-    );   
+    );
   }
 }

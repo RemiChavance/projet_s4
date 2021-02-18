@@ -1,0 +1,15 @@
+ul {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+li {
+    max-width: 33%;
+    min-width: 33%;
+    padding: 16px;
+}
+.exemple-header-image {
+    background-color: blue;
+}

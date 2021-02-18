@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Recipe } from 'src/app/models/recipe.model';
 
 @Component({
   selector: 'app-list-recipe',
@@ -7,17 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListRecipeComponent implements OnInit {
 
-  constructor() { }
+  @Input() recipes: Recipe[];
+  @Input() idGroup: number;
 
-  /**
-   * 
-   * 
-   * composant un peu inutile pour l'instant
-   *  
-   * 
-  **/
+  constructor( ) { }
 
   ngOnInit(): void {
   }
-
 }

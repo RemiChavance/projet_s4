@@ -18,7 +18,9 @@ export class GroupManagerService {
     }
 
     refreshGroup() {
-        this.getGroupeById(this.groupSubject.value.idGroup);
+        if(this.groupSubject.value != null) {
+            this.getGroupeById(this.groupSubject.value.idGroup);
+        }
     }
 
     /**
@@ -35,7 +37,7 @@ export class GroupManagerService {
                     }, (error) => {
                         reject(error);
                     }
-                )
+                );
             }
         );
     }

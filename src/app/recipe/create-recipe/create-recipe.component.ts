@@ -7,6 +7,11 @@
   import { AuthService } from 'src/app/services/auth.service';
   import { RecipeCreationService } from 'src/app/services/recipe-creation.service';
 
+  interface Type {
+    value: string;
+    viewValue: string;
+  }
+
   /**
    * @title Stepper overview
    */
@@ -17,13 +22,19 @@
   })
   export class CreateRecipeComponent implements OnInit, OnDestroy {
 
-    isLinear = false;
+    types: Type[] = [
+      {value: 'Entrée', viewValue: 'Entrée'},
+      {value: 'Plat Principal', viewValue: 'Plat principal'},
+      {value: 'Dessert', viewValue: 'Dessert'}
+    ];
 
     titleFormGroup: FormGroup;
+    typeFormGroup: FormGroup;
     prepTimeFormGroup: FormGroup;
     totalTimeFormGroup: FormGroup;
     ingredientsFormGroup: FormGroup;
     stepsFormGroup: FormGroup;
+    descripFormGroup: FormGroup;
 
     errorMessage: string;
 
@@ -44,12 +55,15 @@
         (user: User) => {
           this.user = user;
         }
-      );      
+      );
     }
 
     initForm() {
       this.titleFormGroup = this.formBuilder.group({
         title: ['', [Validators.required]]
+      });
+      this.typeFormGroup = this.formBuilder.group({
+        type: ['', [Validators.required]]
       });
       this.prepTimeFormGroup = this.formBuilder.group({
         prepTime: ['', Validators.required]
@@ -63,18 +77,24 @@
       this.stepsFormGroup = this.formBuilder.group({
         steps: ['', Validators.required]
       });
+      this.descripFormGroup = this.formBuilder.group({
+        description: ['', Validators.required]
+      });
     }
 
     onSubmit() {
       console.log('envoye');
       const title = this.titleFormGroup.get('title').value;
+      const type = this.typeFormGroup.get('type').value;
       const prepTime = this.prepTimeFormGroup.get('prepTime').value;
       const totalTime = this.totalTimeFormGroup.get('totalTime').value;
       const ingredients = this.ingredientsFormGroup.get('ingredients').value;
       const steps = this.stepsFormGroup.get('steps').value;
+      const description = this.descripFormGroup.get('description').value;
       const author = this.user;
 
-      this.recipeCreationService.createNewRecipe(title, prepTime, totalTime, ingredients, steps, author.id, this.route.snapshot.params['id']).then(
+      this.recipeCreationService.createNewRecipe(
+        title, type, prepTime, totalTime, ingredients, steps, description, author.id, this.route.snapshot.params['id']).then(
         (newRecipeId) => {
           this.router.navigate(['/group', this.route.snapshot.params['id'], 'recipe', newRecipeId]);
         },

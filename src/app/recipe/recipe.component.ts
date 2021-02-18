@@ -27,7 +27,6 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this.groupSubscription = this.groupManagerService.currentGroup.subscribe(
       (group) => {
         if(group) {
-          console.log("recipe component");
           this.group = group;
           this.recipe = this.group.recipes[this.route.snapshot.params["idRecipe"]];
         } else {
