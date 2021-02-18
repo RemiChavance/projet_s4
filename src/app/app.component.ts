@@ -13,7 +13,7 @@ export class AppComponent {
 
     // Firebase access
     const firebaseConfig = {
-      apiKey: "
+      apiKey: "AIzaSyC1zspIj9wrsBiQX16g20kEfWJ0C-oGqDI",
       authDomain: "projet-s4-ghac.firebaseapp.com",
       databaseURL: "https://projet-s4-ghac-default-rtdb.firebaseio.com",
       projectId: "projet-s4-ghac",
