@@ -26,13 +26,22 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this.groupManagerService.refreshGroup();
     this.groupSubscription = this.groupManagerService.currentGroup.subscribe(
       (group) => {
-        if(group) {
-          this.group = group;
-          this.recipe = this.group.recipes[this.route.snapshot.params["idRecipe"]];
+        this.group = group;
+        if(!group) {
+          // groupManagerService n'a pas de groupe initialisé
+          this.groupManagerService.getGroupeById(this.route.snapshot.params["id"]).then(
+            () => {
+              if(group === undefined) { // || group.recipes === undefined) {
+                // le groupe ou le tableau de recette n'existe pas --> ne marche pas très bien
+                this.router.navigate(['/home']);
+              } else {
+                this.recipe = this.group.recipes[this.route.snapshot.params["idRecipe"]];
+              }
+            }
+          );
         } else {
-          this.router.navigate(['/home']);
-        }
-        
+          this.recipe = this.group.recipes[this.route.snapshot.params["idRecipe"]];
+        }       
       }
     );
   }

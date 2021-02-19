@@ -1,8 +1,16 @@
 <div *ngIf="recipe">
 
-    <h4> {{ recipe.title }} </h4>
+    <h4> 
+        {{ recipe.title }} 
+        <app-rate [idGroup]="group.idGroup"
+                  [idRecipe]="recipe.idRecipe"></app-rate>
+    </h4>
+
+    
 
     <p> {{ recipe.description }} </p>
+
+    
 
     <!-- composant pour écrire un commentaire -->
     <app-create-comment [idRecipe]="recipe.idRecipe"

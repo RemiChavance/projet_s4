@@ -83,7 +83,7 @@
     }
 
     onSubmit() {
-      console.log('envoye');
+      console.log('envoyé');
       const title = this.titleFormGroup.get('title').value;
       const type = this.typeFormGroup.get('type').value;
       const prepTime = this.prepTimeFormGroup.get('prepTime').value;
@@ -96,7 +96,7 @@
       this.recipeCreationService.createNewRecipe(
         title, type, prepTime, totalTime, ingredients, steps, description, author.id, this.route.snapshot.params['id']).then(
         (newRecipeId) => {
-          this.router.navigate(['/group', this.route.snapshot.params['id'], 'recipe', newRecipeId]);
+          this.router.navigate(['/group', this.route.snapshot.params['id'], 'recipes', newRecipeId]);
         },
         (error) => {
           this.errorMessage = error;

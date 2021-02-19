@@ -1,4 +1,3 @@
-
 // Angular
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
 
 // Material
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +19,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 
-import { AppComponent } from './app.component';
 // Custom
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -34,18 +33,20 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AdminGroupComponent } from './group/admin-group/admin-group.component';
 import { GroupAdminGuardService } from './services/group-admin-guard.service';
 import { GroupAdminService } from './services/group-admin.service';
+
 // Comments
 import { ListGroupComponent } from './group/list-group/list-group.component';
 import { CommentComponent } from './comment/comment.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 import { CommentCreationService } from './services/comment-creation.service';
+
 // Recipes
 import { RecipeComponent } from './recipe/recipe.component';
 import { RecipeManagerService } from './services/recipe-manager.service';
 import { ListRecipeComponent } from './recipe/list-recipe/list-recipe.component';
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
-
-
+import { RateComponent } from './recipe/rate/rate.component';
+import { RateService } from './services/rate.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     ListGroupComponent,
     CommentComponent,
     CreateCommentComponent,
-    ListRecipeComponent
+    ListRecipeComponent,
+    RateComponent
   ],
   imports: [
     BrowserModule,
@@ -102,9 +104,9 @@ const appRoutes: Routes = [
     GroupManagerService,
     GroupAdminGuardService,
     GroupAdminService,
-
     RecipeManagerService,
-    CommentCreationService
+    CommentCreationService,
+    RateService
 
   ],
   bootstrap: [AppComponent]

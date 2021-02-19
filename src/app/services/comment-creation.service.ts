@@ -51,10 +51,10 @@ export class CommentCreationService {
             .once('value')
             .then(
               (data) => {
-                if (data.val()) {
+                if(data.val()) {
                   let lastComment: Comment;
                   const dataVal = data.val();
-                  for (const key in dataVal) {
+                  for(const key in dataVal) {
                     lastComment = dataVal[key];
                   }
                   resolve(lastComment.idComment + 1);

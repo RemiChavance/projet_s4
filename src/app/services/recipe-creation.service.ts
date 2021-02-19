@@ -19,17 +19,16 @@ export class RecipeCreationService {
     (resolve, reject) => {
       this.getNextId(idGroup).then( // Get next Id to assign it to the new group
           (nextRecipeId) => {
-              const newRecipe: Recipe = new Recipe(nextRecipeId, title, type, prepTime, totalTime, ingredients, steps, description, author);
-              newRecipe.rates = [];
-              newRecipe.comments = [];
-              // Create new recipe
-              firebase.database().ref('group/' + idGroup + '/recipes/' + newRecipe.idRecipe).set(newRecipe).then(
-                  () => {
-                      resolve(newRecipe.idRecipe);
-                  }
-              );
+            const newRecipe: Recipe = new Recipe(nextRecipeId, title, type, prepTime, totalTime, ingredients, steps, description, author, [1, 2, 3]);
+            newRecipe.comments = [];
+            // Create new recipe
+            firebase.database().ref('group/' + idGroup + '/recipes/' + newRecipe.idRecipe).set(newRecipe).then(
+                () => {
+                    resolve(newRecipe.idRecipe);
+                }
+            );
           }, (error) => {
-              reject(error);
+            reject(error);
           }
         );
       }
