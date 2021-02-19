@@ -25,15 +25,18 @@
     types: Type[] = [
       {value: 'Entrée', viewValue: 'Entrée'},
       {value: 'Plat Principal', viewValue: 'Plat principal'},
-      {value: 'Dessert', viewValue: 'Dessert'}
+      {value: 'Dessert', viewValue: 'Dessert'},
+      {value: 'Snack', viewValue: 'Snack'}
     ];
 
     titleFormGroup: FormGroup;
     typeFormGroup: FormGroup;
     prepTimeFormGroup: FormGroup;
     totalTimeFormGroup: FormGroup;
+
     ingredientsFormGroup: FormGroup;
     stepsFormGroup: FormGroup;
+
     descripFormGroup: FormGroup;
 
     errorMessage: string;
@@ -71,15 +74,23 @@
       this.totalTimeFormGroup = this.formBuilder.group({
         totalTime: ['', Validators.required]
       });
+
       this.ingredientsFormGroup = this.formBuilder.group({
-        ingredients: ['', Validators.required]
+        title: [],
+        ingredients: this.formBuilder.array(['', Validators.required])
       });
       this.stepsFormGroup = this.formBuilder.group({
-        steps: ['', Validators.required]
+        title: [],
+        steps: this.formBuilder.array(['', Validators.required])
       });
+
       this.descripFormGroup = this.formBuilder.group({
         description: ['', Validators.required]
       });
+    }
+
+    onClickAddIngredient() {
+
     }
 
     onSubmit() {

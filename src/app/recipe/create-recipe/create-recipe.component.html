@@ -62,7 +62,13 @@
       <mat-step [stepControl]="ingredientsFormGroup">
         <form [formGroup]="ingredientsFormGroup">
           <ng-template matStepLabel>Ingrédients</ng-template>
-            <input matInput placeholder="Ingrédients" formControlName="ingredients" required> 
+            <input matInput placeholder="Ingrédients" formControlName="ingredients" required>
+            <button
+              (click)="onClickAddIngredient()"
+              mat-mini-fab color="primary"
+              aria-label="add-recipe-button">
+              <mat-icon>add</mat-icon>
+          </button> 
           <div>
             <button mat-button matStepperPrevious>Retour</button>
             <button mat-button matStepperNext>Suivant</button>
