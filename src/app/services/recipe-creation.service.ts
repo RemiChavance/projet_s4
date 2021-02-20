@@ -19,7 +19,7 @@ export class RecipeCreationService {
     (resolve, reject) => {
       this.getNextId(idGroup).then( // Get next Id to assign it to the new group
           (nextRecipeId) => {
-            const newRecipe: Recipe = new Recipe(nextRecipeId, title, type, prepTime, totalTime, ingredients, steps, description, author, [1, 2, 3]);
+            const newRecipe: Recipe = new Recipe(nextRecipeId, title, type, prepTime, totalTime, ingredients, steps, description, author, []);
             newRecipe.comments = [];
             // Create new recipe
             firebase.database().ref('group/' + idGroup + '/recipes/' + newRecipe.idRecipe).set(newRecipe).then(

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GroupManagerService } from 'src/app/services/group-manager.service';
 import { RateService } from 'src/app/services/rate.service';
 
 @Component({
@@ -20,18 +21,17 @@ export class RateComponent implements OnInit {
   star5: string = "star_border";
 
 
-  constructor(private rateService: RateService) { }
+  constructor(private rateService: RateService,
+              private groupManagerService: GroupManagerService) { }
 
   ngOnInit(): void {
   }
 
 
   onMouseClick(nbStar: number) {
-    console.log("rating : " + nbStar);
     this.rateService.postRate(nbStar, this.idGroup, this.idRecipe).then(
       () => {
-        // appeler groupManagerService.refreshGroup() pour mettre a jour la moyenne des notes
-        console.log("rated !");
+        this.groupManagerService.refreshGroup();
       }
     );
   }
