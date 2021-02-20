@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group.model';
 import { User } from 'src/app/models/user.model';
@@ -13,10 +14,20 @@ export class AdminGroupComponent implements OnInit {
   group: Group;
   user: User;
 
+  nbComments: number = 0;
+
   constructor(private groupAdminService: GroupAdminService) { }
 
   ngOnInit() {
     this.user = this.groupAdminService.user;
     this.group = this.groupAdminService.group;
+
+    if(this.group && this.group.recipes) {
+      this.group.recipes.forEach(recipe => {
+        if(recipe.comments) {
+          this.nbComments = recipe.comments.length;
+        }
+      });
+    }
   }
 }
