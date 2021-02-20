@@ -19,6 +19,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
 
   fullStars: number[] = [];
   emptyStars: number[] = [];
+  moyenne: number = 0;
 
   constructor(private route: ActivatedRoute,
               private recipeManagerService: RecipeManagerService,
@@ -56,20 +57,20 @@ export class RecipeComponent implements OnInit, OnDestroy {
   initRating() {
     this.emptyStars = [];
     this.fullStars = [];
-      if(this.recipe && this.recipe.rates) {
-      let moyenne: number = 0;
+    this.moyenne = 0;
+    if(this.recipe && this.recipe.rates) {
       let nbRate: number = 0;
       this.recipe.rates.forEach(rate => {
-        moyenne = moyenne + rate;
+        this.moyenne = this.moyenne + rate;
         nbRate++;
       });
-      moyenne = moyenne / nbRate;
-      moyenne = Math.round(moyenne);
+      this.moyenne = this.moyenne / nbRate;
+      let moyStars = Math.round(this.moyenne);
 
-      for(let i=0; i<moyenne; i++) {
+      for(let i=0; i<moyStars; i++) {
         this.fullStars.push(1);
       }
-      for(let i=0; i<(5-moyenne); i++) {
+      for(let i=0; i<(5-moyStars); i++) {
         this.emptyStars.push(1);
       }
     } else {

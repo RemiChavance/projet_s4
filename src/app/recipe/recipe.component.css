@@ -1,3 +1,7 @@
 mat-icon {
     color: rgba(255, 166, 0, 0.596);
 }
+
+.moyenne {
+    font-size: small;
+}
