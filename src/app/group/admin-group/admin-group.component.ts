@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/models/group.model';
 import { User } from 'src/app/models/user.model';
