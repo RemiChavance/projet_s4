@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Group } from '../models/group.model';
+import { Recipe } from '../models/recipe.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { GroupAdminService } from '../services/group-admin.service';
 import { GroupManagerService } from '../services/group-manager.service';
+import { RecipeManagerService } from '../services/recipe-manager.service';
 
 @Component({
   selector: 'app-group',
@@ -18,14 +20,18 @@ export class GroupComponent implements OnInit, OnDestroy {
   groupSubscription: Subscription;
   nonExistentGroup = false;
 
+  recipes: Recipe[] = [];
+
   user: User;
   userSubscription: Subscription;
 
   constructor(private groupManagerService: GroupManagerService,
-              private route: ActivatedRoute,
+              private recipeManagerService: RecipeManagerService,
               private authService: AuthService,
+              private groupAdminService: GroupAdminService,
+              private route: ActivatedRoute,
               private router: Router,
-              private groupAdminService: GroupAdminService) { }
+              ) { }
 
   ngOnInit(): void {
     this.group = new Group('', null);
@@ -36,6 +42,11 @@ export class GroupComponent implements OnInit, OnDestroy {
           (group) => {
             if(group) {
               this.group = group;
+              this.recipeManagerService.getAllRecipesFromGroup(this.group.idGroup).then(
+                (recipes) => {
+                  this.recipes = recipes;
+                } 
+              );
             } else {
               this.nonExistentGroup = true;
             }

@@ -1,28 +1,28 @@
 <p>Liste des recettes:</p>
 <ul ng-template *ngIf="recipes?.length; else noRecipes">
 
-    <li *ngFor="let recipe of recipes">
+  <li *ngFor="let recipe of recipes">
 
-        <!--  -->
-        <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"><mat-icon>timer</mat-icon>{{ recipe.totalTime }}</div>
-              <mat-card-title><a routerLink="/group/{{idGroup}}/recipes/{{recipe.idRecipe}}"> {{ recipe.title }} </a></mat-card-title>
-              <mat-card-subtitle>{{ recipe.type}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="https://source.unsplash.com/collection/12187581/1600x900" alt="Photo of a Shiba Inu">
-            <mat-card-content>
-              <p>
-                {{ recipe.description }}
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
-          </mat-card>
+    <!--  -->
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"><mat-icon>timer</mat-icon>{{ recipe.totalTime }}</div>
+          <mat-card-title><a routerLink="/group/{{idGroup}}/recipe/{{recipe.idRecipe}}"> {{ recipe.title }} </a></mat-card-title>
+          <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://source.unsplash.com/collection/12187581/1600x900" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            {{ recipe.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
 
-    </li>
+  </li>
 
 </ul>
 

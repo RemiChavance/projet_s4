@@ -1,9 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Group } from '../models/group.model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../models/recipe.model';
-import { GroupManagerService } from '../services/group-manager.service';
 import { RecipeManagerService } from '../services/recipe-manager.service';
 
 @Component({
@@ -11,10 +8,8 @@ import { RecipeManagerService } from '../services/recipe-manager.service';
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.css']
 })
-export class RecipeComponent implements OnInit, OnDestroy {
+export class RecipeComponent implements OnInit {
 
-  group: Group;
-  groupSubscription: Subscription;
   recipe: Recipe;
 
   fullStars: number[] = [];
@@ -22,35 +17,16 @@ export class RecipeComponent implements OnInit, OnDestroy {
   moyenne: number = 0;
 
   constructor(private route: ActivatedRoute,
-              private recipeManagerService: RecipeManagerService,
-              private groupManagerService: GroupManagerService,
-              private router: Router) { }
+              private recipeManagerService: RecipeManagerService) { }
 
   ngOnInit(): void {
-    this.groupManagerService.refreshGroup();
-    this.groupSubscription = this.groupManagerService.currentGroup.subscribe(
-      (group) => {
-        this.group = group;
-        if(!group) {
-          // groupManagerService n'a pas de groupe initialisé
-          this.groupManagerService.getGroupeById(this.route.snapshot.params["id"]).then(
-            () => {
-              if(group === undefined) { // || group.recipes === undefined) {
-                // le groupe ou le tableau de recette n'existe pas --> ne marche pas très bien
-                this.router.navigate(['/home']);
-              }
-            }
-          );
-        } else {
-          this.recipe = this.group.recipes[this.route.snapshot.params["idRecipe"]];
-          this.initRating();
-        }       
+    this.recipeManagerService.currentRecipe.subscribe(
+      (recipe) => {
+        this.recipe = recipe;
+        this.initRating();
       }
     );
-  }
-
-  ngOnDestroy() {
-    this.groupSubscription.unsubscribe();
+    this.recipeManagerService.getRecipeById(this.route.snapshot.params['idRecipe']).then();
   }
 
 

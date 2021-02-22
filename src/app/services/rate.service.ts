@@ -8,13 +8,13 @@ export class RateService {
 
   constructor() { }
 
-  postRate(rate: number, idGroup: number, idRecipe: number) {
+  postRate(rate: number, idRecipe: number) {
     return new Promise<void>(
       (resolve, reject) => {
-        this.getNextId(idGroup, idRecipe).then(
+        this.getNextId(idRecipe).then(
           (nextRateId) => {
             firebase.database()
-            .ref('/group/' + idGroup + '/recipes/' + idRecipe + '/rates/' + nextRateId)
+            .ref('recipe/' + idRecipe + '/rates/' + nextRateId)
             .set(rate)
             .then(
               () => {
@@ -27,11 +27,11 @@ export class RateService {
     );
   }
 
-  getNextId(idGroup: number, idRecipe: number) {
+  getNextId(idRecipe: number) {
     return new Promise<number>(
       (resolve, reject) => {
         firebase.database()
-          .ref('/group/' + idGroup + '/recipes/' + idRecipe + '/rates/')
+          .ref('recipe/' + idRecipe + '/rates/')
           .orderByKey()
           .limitToLast(1)
           .once('value')

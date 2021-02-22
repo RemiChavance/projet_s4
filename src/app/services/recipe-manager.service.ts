@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import { BehaviorSubject } from 'rxjs';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({
@@ -7,43 +8,65 @@ import { Recipe } from '../models/recipe.model';
 })
 export class RecipeManagerService {
 
+  private recipeSubject = new BehaviorSubject<Recipe>(null);
+  currentRecipe= this.recipeSubject.asObservable();
+
   constructor() { }
 
+  changeRecipe(recipe: Recipe) {
+      this.recipeSubject.next(recipe);
+  }
+
+  refreshRecipe() {
+    if(this.recipeSubject.value != null) {
+        this.getRecipeById(this.recipeSubject.value.idRecipe);
+    }
+  }
+
   /**
-   * Return recipe by it's id
+   * Get recipe by it's id
+   * @param idRecipe 
    */
-  getRecipe(idGroup: number, idRecipe: number) {
-    return new Promise<Recipe>(
+  getRecipeById(idRecipe: string) {
+    return new Promise<void>(
       (resolve, reject) => {
         firebase.database()
-          .ref('/group/' + idGroup + '/recipe/' + idRecipe)
+          .ref('recipe/' + idRecipe)
           .once('value')
           .then(
             (recipe) => {
-              resolve(recipe.val());
+              this.changeRecipe(recipe.val());
+              resolve();
             }
           );
       }
     );
   }
 
-  // --> A priori on aura pas besoins d'une fonction de ce genre :)
-  /*
+  
+  /**
+   * Get all recipe from a group
+   * @param idGroup
+   */
   getAllRecipesFromGroup(idGroup: number) {
     return new Promise<Recipe[]>(
       (resolve, reject) => {
-        console.log(idGroup);
-        firebase.database().ref('/group/' + idGroup + '/recipes/').once('value').then(
+        firebase.database()
+          .ref('recipe/')
+          .orderByChild("idGroup")
+          .equalTo(idGroup.toString())
+          .once('value').then(
             (data) => {
-                let dataArray = new Array<Recipe>();
-                let dataVal = data.val();
-                for (let key in dataVal) {
-                    dataArray.push(dataVal[key]);
-                }
-                resolve(dataArray);
+              let dataArray = new Array<Recipe>();
+              let dataVal = data.val();
+              for (let key in dataVal) {
+                  dataArray.push(dataVal[key]);
+              }
+              console.log(dataArray);
+              resolve(dataArray);
             }
         );
       }
     );
-  }*/
+  }
 }

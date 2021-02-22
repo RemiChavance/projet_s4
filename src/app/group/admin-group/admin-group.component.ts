@@ -21,12 +21,12 @@ export class AdminGroupComponent implements OnInit {
     this.user = this.groupAdminService.user;
     this.group = this.groupAdminService.group;
 
-    if(this.group && this.group.recipes) {
+    /*if(this.group && this.group.recipes) {
       this.group.recipes.forEach(recipe => {
         if(recipe.comments) {
           this.nbComments = recipe.comments.length;
         }
       });
-    }
+    }*/
   }
 }

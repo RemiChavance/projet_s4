@@ -5,24 +5,20 @@
 
         <mat-icon *ngFor="let fullStar of fullStars">star</mat-icon>
         <mat-icon *ngFor="let emptyStar of emptyStars">star_border</mat-icon>
-        <span class="moyenne">{{moyenne}} / 5</span>
-        
+        <span class="moyenne">{{ moyenne | number : '1.0-1' }} / 5</span>
     </h4>
 
-    
 
     <p> {{ recipe.description }} </p>
-
     
+    
+    <!-- composant pour noter la recette -->
     <h4>Noter cette recette</h4>
-    <app-rate [idGroup]="group.idGroup"
-                  [idRecipe]="recipe.idRecipe">
-    </app-rate>
+    <app-rate [idRecipe]="recipe.idRecipe"></app-rate>
+
 
     <!-- composant pour écrire un commentaire -->
-    <app-create-comment [idRecipe]="recipe.idRecipe"
-                        [idGroup]="group.idGroup">
-    </app-create-comment>
+    <app-create-comment [idRecipe]="recipe.idRecipe"></app-create-comment>
 
 
     <!-- composant pour afficher les commentaires -->

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommentCreationService } from 'src/app/services/comment-creation.service';
-import { GroupManagerService } from 'src/app/services/group-manager.service';
+import { RecipeManagerService } from 'src/app/services/recipe-manager.service';
 
 @Component({
   selector: 'app-create-comment',
@@ -14,8 +14,7 @@ import { GroupManagerService } from 'src/app/services/group-manager.service';
 export class CreateCommentComponent implements OnInit, OnDestroy {
 
   
-  @Input() idRecipe: number;
-  @Input() idGroup: number;
+  @Input() idRecipe: string;
 
   createCommentForm: FormGroup;
   
@@ -24,8 +23,8 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
               private commentCreationService: CommentCreationService,
-              private authService: AuthService,
-              private groupManagerService: GroupManagerService) { }
+              private recipeManagerService: RecipeManagerService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -45,9 +44,9 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   onSubmit() {
     const comment = this.createCommentForm.get('comment').value;
 
-    this.commentCreationService.createNewComment(comment, this.user.id, this.idGroup, this.idRecipe).then(
+    this.commentCreationService.createNewComment(comment, this.user.id, this.idRecipe).then(
       () => {
-        this.groupManagerService.refreshGroup();
+        this.recipeManagerService.refreshRecipe();
         this.createCommentForm.reset();
       }
     )

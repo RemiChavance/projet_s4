@@ -2,7 +2,8 @@ import { Comment } from './comment.model';
 
 export class Recipe {
     constructor(
-        public idRecipe: number,
+        public idRecipe: string,
+        public idGroup: number,
         public title: string,
         public type: string,
         public prepTime: number,

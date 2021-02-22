@@ -16,14 +16,14 @@ export class CommentCreationService {
    * @param idGroup
    * @param idRecipe
    */
-  createNewComment(description: string, idAuthor: string, idGroup: number, idRecipe: number) {
+  createNewComment(description: string, idAuthor: string, idRecipe: string) {
     return new Promise<void>(
       (resolve, reject) => {
-        this.getNextId(idGroup, idRecipe).then(
+        this.getNextId(idRecipe).then(
           (nextCommentId) => {
             const newComment = new Comment(nextCommentId, description, idAuthor);
             firebase.database()
-              .ref('/group/' + idGroup + '/recipes/' + idRecipe + '/comments/' + nextCommentId).set(newComment)
+              .ref('/recipe/' + idRecipe + '/comments/' + nextCommentId).set(newComment)
               .then(
                 () => {
                   resolve();
@@ -41,11 +41,11 @@ export class CommentCreationService {
   /**
    * Return next idComment in a recipe
    */
-  getNextId(idGroup: number, idRecipe: number) {
+  getNextId(idRecipe: string) {
     return new Promise<number>(
       (resolve, reject) => {
           firebase.database()
-            .ref('/group/' + idGroup + '/recipes/' + idRecipe + '/comments/')
+            .ref('recipe/' + idRecipe + '/comments/')
             .orderByKey()
             .limitToLast(1)
             .once('value')

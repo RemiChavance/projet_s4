@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GroupManagerService } from 'src/app/services/group-manager.service';
 import { RateService } from 'src/app/services/rate.service';
+import { RecipeManagerService } from 'src/app/services/recipe-manager.service';
 
 @Component({
   selector: 'app-rate',
@@ -9,7 +9,6 @@ import { RateService } from 'src/app/services/rate.service';
 })
 export class RateComponent implements OnInit {
 
-  @Input() idGroup: number;
   @Input() idRecipe: number;
 
   moyenne: number = 0;
@@ -22,16 +21,16 @@ export class RateComponent implements OnInit {
 
 
   constructor(private rateService: RateService,
-              private groupManagerService: GroupManagerService) { }
+              private recipeManagerService: RecipeManagerService) { }
 
   ngOnInit(): void {
   }
 
 
   onMouseClick(nbStar: number) {
-    this.rateService.postRate(nbStar, this.idGroup, this.idRecipe).then(
+    this.rateService.postRate(nbStar, this.idRecipe).then(
       () => {
-        this.groupManagerService.refreshGroup();
+        this.recipeManagerService.refreshRecipe();
       }
     );
   }

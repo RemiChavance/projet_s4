@@ -18,7 +18,6 @@ export class GroupCreationService {
                         newGroup.idGroup = nextGroupId;
                         newGroup.requests = [];
                         newGroup.stats = [];
-                        newGroup.recipes = [];
                         // Create new group
                         firebase.database().ref('/group/nextGroupId').set(nextGroupId + 1);
                         firebase.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
