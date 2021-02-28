@@ -4,7 +4,7 @@ export class Group {
     constructor(
         public name: string,
         public adminId: string,
-        public idGroup?: number,
+        public idGroup?: string,
         public requests?: string[],
         public stats?: Stat[],
     ) { }

@@ -48,13 +48,13 @@ export class RecipeManagerService {
    * Get all recipe from a group
    * @param idGroup
    */
-  getAllRecipesFromGroup(idGroup: number) {
+  getAllRecipesFromGroup(idGroup: string) {
     return new Promise<Recipe[]>(
       (resolve, reject) => {
         firebase.database()
           .ref('recipe/')
           .orderByChild("idGroup")
-          .equalTo(idGroup.toString())
+          .equalTo(idGroup)
           .once('value').then(
             (data) => {
               let dataArray = new Array<Recipe>();
@@ -62,7 +62,6 @@ export class RecipeManagerService {
               for (let key in dataVal) {
                   dataArray.push(dataVal[key]);
               }
-              console.log(dataArray);
               resolve(dataArray);
             }
         );

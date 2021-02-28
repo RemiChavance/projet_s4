@@ -27,7 +27,7 @@ export class GroupManagerService {
      * return Groupe by id
      * @param id
      */
-    getGroupeById(id: number) {
+    getGroupeById(id: string) {
         return new Promise<void>(
             (resolve, reject) => {
                 firebase.database().ref('/group/' + id).once('value').then(

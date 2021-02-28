@@ -10,22 +10,17 @@ export class GroupCreationService {
     constructor() { }
 
     createNewGroupe(name: string, adminId: string) {
-        return new Promise<number>(
+        return new Promise<string>(
             (resolve, reject) => {
                 const newGroup: Group = new Group(name, adminId);
-                this.getNextId().then( // Get next Id to assign it to the new group
-                    (nextGroupId) => {
-                        newGroup.idGroup = nextGroupId;
-                        newGroup.requests = [];
-                        newGroup.stats = [];
-                        // Create new group
-                        firebase.database().ref('/group/nextGroupId').set(nextGroupId + 1);
-                        firebase.database().ref('/group/' + newGroup.idGroup).set(newGroup).then(
-                            () => {
-                                resolve(newGroup.idGroup);
-                            }
-                        );
+                newGroup.requests = [];
+                newGroup.stats = [];
 
+                const newGroupRef = firebase.database().ref('group/').push();
+                newGroup.idGroup = this.getId(newGroupRef.toString());
+                newGroupRef.set(newGroup).then(
+                    () => {
+                        resolve(newGroup.idGroup);
                     }, (error) => {
                         reject(error);
                     }
@@ -35,21 +30,11 @@ export class GroupCreationService {
     }
 
     /**
-     * Return next available group id
-     */
-    getNextId() {
-        return new Promise<number>(
-            (resolve, reject) => {
-                firebase.database().ref('/group/nextGroupId')
-                    .once('value')
-                    .then(
-                    (data) => {
-                        resolve(data.val());
-                    }, (error) => {
-                        reject(error);
-                    }
-                );
-            }
-        );
+   * Return idGroup in function of his database ref
+   * @param newGroupRef
+   */
+    getId(newGroupRef: string): string {
+        var splitted = newGroupRef.split("/");
+        return splitted[splitted.length - 1];
     }
 }
