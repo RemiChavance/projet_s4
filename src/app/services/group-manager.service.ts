@@ -55,7 +55,6 @@ export class GroupManagerService {
                         for (let key in dataVal) {
                             dataArray.push(dataVal[key]);
                         }
-                        dataArray.splice(-1, 1);
                         resolve(dataArray);
                     }
                 );
