@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if(user) {
           this.authService.getUser(user.uid).then(
             (data: User) => {
+              //console.log(data);
               this.authService.changeUser(data);
             }
           );

@@ -34,15 +34,18 @@ export class RecipeComponent implements OnInit {
     this.emptyStars = [];
     this.fullStars = [];
     this.moyenne = 0;
+
     if(this.recipe && this.recipe.rates) {
-      let nbRate: number = 0;
+      let nbRate: number = this.recipe.rates.length;
       this.recipe.rates.forEach(rate => {
-        this.moyenne = this.moyenne + rate;
-        nbRate++;
+        this.moyenne = this.moyenne + rate.description;
       });
+
+      // Calcul de la moyenne
       this.moyenne = this.moyenne / nbRate;
       let moyStars = Math.round(this.moyenne);
 
+      // Affichage des étoiles
       for(let i=0; i<moyStars; i++) {
         this.fullStars.push(1);
       }
@@ -55,5 +58,4 @@ export class RecipeComponent implements OnInit {
       }
     }
   }
-
 }

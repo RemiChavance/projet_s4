@@ -1,4 +1,5 @@
 import { Comment } from './comment.model';
+import { Rate } from './rate.model';
 
 export class Recipe {
     constructor(
@@ -12,7 +13,7 @@ export class Recipe {
         public steps: string,
         public description: string,
         public author: string,
-        public rates?: number[],
+        public rates?: Rate[],
         public comments?: Comment[]
     ) { }
 }

@@ -5,7 +5,7 @@ export class User {
         public id: string,
         public email?: string,
         public name?: string,
-        public groups?: Group[],
+        public groups?: string[],
         public rates?: number[],
         public nbComments?: number
     ) { }

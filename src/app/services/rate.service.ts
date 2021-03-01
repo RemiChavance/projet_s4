@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import { Rate } from '../models/rate.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,21 @@ export class RateService {
 
   constructor() { }
 
-  postRate(rate: number, idRecipe: number) {
+  /**
+   * Create new Rate
+   * @param rate 
+   * @param idRecipe 
+   * @param idAuthor 
+   */
+  postNewRate(rate: number, idRecipe: number, idAuthor: string) {
     return new Promise<void>(
       (resolve, reject) => {
         this.getNextId(idRecipe).then(
           (nextRateId) => {
+            const newRate = new Rate(nextRateId, rate, idAuthor);
             firebase.database()
             .ref('recipe/' + idRecipe + '/rates/' + nextRateId)
-            .set(rate)
+            .set(newRate)
             .then(
               () => {
                 resolve();
@@ -27,6 +35,30 @@ export class RateService {
     );
   }
 
+  /**
+   * Repost a Rate
+   * @param rate 
+   * @param idRecipe 
+   */
+  repostRate(rate: Rate, idRecipe: number) {
+    return new Promise<void>(
+      (resolve, reject) => {
+        firebase.database()
+        .ref('recipe/' + idRecipe + '/rates/' + rate.idRate)
+        .set(rate)
+        .then(
+          () => {
+            resolve();
+          }
+        );
+      }
+    );
+  }
+
+  /**
+   * Return new available id
+   * @param idRecipe 
+   */
   getNextId(idRecipe: number) {
     return new Promise<number>(
       (resolve, reject) => {
