@@ -47,6 +47,7 @@ import { ListRecipeComponent } from './recipe/list-recipe/list-recipe.component'
 import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.component';
 import { RateComponent } from './recipe/rate/rate.component';
 import { RateService } from './services/rate.service';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
   { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
   { path: 'group/:id/recipe/:idRecipe', component: RecipeComponent },
   { path: 'group/:id/create-recipe', component: CreateRecipeComponent },
+  { path: 'user/:idUser', canActivate: [AuthGuardService], component: UserProfilComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     CommentComponent,
     CreateCommentComponent,
     ListRecipeComponent,
-    RateComponent
+    RateComponent,
+    UserProfilComponent
   ],
   imports: [
     BrowserModule,

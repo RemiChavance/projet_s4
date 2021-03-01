@@ -2,7 +2,7 @@
 <h5>Propriétaire / Admin : {{ user.name }}</h5>
 
 <br>
-<!--<p>Nombre de recette : {{ group.recipes.length }}</p>-->
+<p *ngIf="recipes">Nombre de recette : {{ recipes.length }}</p>
 <p>Nombre de commentaires : {{ nbComments }}</p>
 
 <br><br>

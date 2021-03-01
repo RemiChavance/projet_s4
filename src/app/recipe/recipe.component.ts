@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../models/recipe.model';
 import { RecipeManagerService } from '../services/recipe-manager.service';
 
@@ -17,7 +17,8 @@ export class RecipeComponent implements OnInit {
   moyenne: number = 0;
 
   constructor(private route: ActivatedRoute,
-              private recipeManagerService: RecipeManagerService) { }
+              private recipeManagerService: RecipeManagerService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.recipeManagerService.currentRecipe.subscribe(
@@ -57,5 +58,9 @@ export class RecipeComponent implements OnInit {
         this.emptyStars.push(1);
       }
     }
+  }
+
+  onBack() {
+    this.router.navigate(['/group', this.recipe.idGroup]);
   }
 }
