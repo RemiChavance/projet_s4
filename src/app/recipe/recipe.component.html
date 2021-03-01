@@ -1,36 +1,42 @@
-<div *ngIf="recipe">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <button mat-flat-button color="warn" (click)="onBack()"><mat-icon class="back">keyboard_backspace</mat-icon></button>
+        </div>
+                
+        <div class="col-sm" *ngIf="recipe">
 
-    <h4> 
-        {{ recipe.title }}
+            <h4> 
+                {{ recipe.title }}
 
-        <mat-icon *ngFor="let fullStar of fullStars">star</mat-icon>
-        <mat-icon *ngFor="let emptyStar of emptyStars">star_border</mat-icon>
-        <span class="moyenne">{{ moyenne | number : '1.0-1' }} / 5</span>
-    </h4>
-
-
-    <p> {{ recipe.description }} </p>
-    
-    
-    <!-- composant pour noter la recette -->
-    <h4>Noter cette recette</h4>
-    <app-rate [idRecipe]="recipe.idRecipe"></app-rate>
+                <mat-icon *ngFor="let fullStar of fullStars">star</mat-icon>
+                <mat-icon *ngFor="let emptyStar of emptyStars">star_border</mat-icon>
+                <span class="moyenne">{{ moyenne | number : '1.0-1' }} / 5</span>
+            </h4>
 
 
-    <!-- composant pour écrire un commentaire -->
-    <app-create-comment [idRecipe]="recipe.idRecipe"></app-create-comment>
+            <p> {{ recipe.description }} </p>
+            
+            
+            <!-- composant pour noter la recette -->
+            <h4>Noter cette recette</h4>
+            <app-rate [idRecipe]="recipe.idRecipe" [rates]="recipe.rates"></app-rate>
 
 
-    <!-- composant pour afficher les commentaires -->
-    <div *ngIf="recipe.comments">
-        <br>
-        <h4>Commentaires</h4>
-        <app-comment *ngFor="let comment of recipe.comments"
-                    [comment]="comment"
-        ></app-comment>
+            <!-- composant pour écrire un commentaire -->
+            <app-create-comment [idRecipe]="recipe.idRecipe"></app-create-comment>
+
+
+            <!-- composant pour afficher les commentaires -->
+            <div *ngIf="recipe.comments">
+                <br>
+                <h4>Commentaires</h4>
+                <app-comment *ngFor="let comment of recipe.comments"
+                            [comment]="comment"
+                ></app-comment>
+            </div>
+
+        </div>
+
     </div>
-
 </div>
-
-
-

@@ -13,9 +13,9 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item disabled>
-                <mat-icon>article</mat-icon>
-                <span>Mes recettes</span>
+            <button mat-menu-item (click)="onProfil()">
+                <mat-icon>account_circle</mat-icon>
+                <span>Profil</span>
             </button>
             <button mat-menu-item disabled>
                 <mat-icon>favorite</mat-icon>

@@ -1,8 +1,8 @@
 export class Stat {
     constructor(
         public idUser: string,
-        public nbCommentaires: number,
-        public notes: number[],
+        public nbComments: number,
+        public rates: number[],
         public nbRecipePosted: number
     ) { }
 }

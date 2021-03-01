@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../models/recipe.model';
 import { RecipeManagerService } from '../services/recipe-manager.service';
 
@@ -17,7 +17,8 @@ export class RecipeComponent implements OnInit {
   moyenne: number = 0;
 
   constructor(private route: ActivatedRoute,
-              private recipeManagerService: RecipeManagerService) { }
+              private recipeManagerService: RecipeManagerService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.recipeManagerService.currentRecipe.subscribe(
@@ -34,15 +35,18 @@ export class RecipeComponent implements OnInit {
     this.emptyStars = [];
     this.fullStars = [];
     this.moyenne = 0;
+
     if(this.recipe && this.recipe.rates) {
-      let nbRate: number = 0;
+      let nbRate: number = this.recipe.rates.length;
       this.recipe.rates.forEach(rate => {
-        this.moyenne = this.moyenne + rate;
-        nbRate++;
+        this.moyenne = this.moyenne + rate.description;
       });
+
+      // Calcul de la moyenne
       this.moyenne = this.moyenne / nbRate;
       let moyStars = Math.round(this.moyenne);
 
+      // Affichage des étoiles
       for(let i=0; i<moyStars; i++) {
         this.fullStars.push(1);
       }
@@ -56,4 +60,7 @@ export class RecipeComponent implements OnInit {
     }
   }
 
+  onBack() {
+    this.router.navigate(['/group', this.recipe.idGroup]);
+  }
 }
