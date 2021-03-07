@@ -17,6 +17,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
   @Input() idRecipe: string;
 
   createCommentForm: FormGroup;
+  errorMessage: string;
   
   user: User;
   userSubscription: Subscription;

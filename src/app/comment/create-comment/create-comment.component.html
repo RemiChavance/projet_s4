@@ -1,17 +1,12 @@
-<h4>Poster un commentaire</h4>
-
-<form [formGroup]="createCommentForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="name">Votre commentaire :</label>
-        
-        <input type="text"
-                id="name"
-                class="form-control"
-                formControlName="comment">
-    </div>
-
-    <button class="btn btn-primary"
-            type="submit">
-            Poster
-    </button>
+<form [formGroup]="createCommentForm" (ngSubmit)="onSubmit()" class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Commentaire</mat-label>
+        <input matInput
+            type="text"
+            id="commebt"
+            formControlName="comment"            >
+        </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="createCommentForm.invalid">Poster</button>
 </form>
+
+<p class="text-danger">{{ errorMessage }}</p>

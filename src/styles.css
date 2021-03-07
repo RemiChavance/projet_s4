@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; background: #303030; color: white; }
+a { color: #69f0ae; }
+a:hover { text-decoration: underline; color: #69f0ae; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
