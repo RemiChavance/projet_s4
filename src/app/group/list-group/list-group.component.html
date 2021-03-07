@@ -5,6 +5,8 @@
     <ul>
         <li *ngFor="let group of groups">
             <a routerLink="/group/{{group.idGroup}}"> {{ group.name }} </a>
+
+            <button mat-flat-button color="accent" (click)="onSubscribe(group.idGroup)">S'incrire</button>
         </li>
     </ul>
 

@@ -48,6 +48,7 @@ import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.comp
 import { RateComponent } from './recipe/rate/rate.component';
 import { RateService } from './services/rate.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+import { GroupSubscriptionService } from './services/group-subscription.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -107,10 +108,10 @@ const appRoutes: Routes = [
     GroupManagerService,
     GroupAdminGuardService,
     GroupAdminService,
+    GroupSubscriptionService,
     RecipeManagerService,
     CommentCreationService,
     RateService
-
   ],
   bootstrap: [AppComponent]
 })

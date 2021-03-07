@@ -7,3 +7,17 @@
 
 <br><br>
 <p><i><b>Work In Progress</b> : ici figurera par la suite l'utilisateur commentant le plus, notant le mieux, etc ...</i></p>
+
+
+<br><br>
+<br><br>
+
+<h5>Demandes d'inscription au groupe : </h5>
+
+<ul>
+    <li *ngFor="let user of requests">
+        {{user.name}}
+        <button mat-flat-button color="accent" (click)="onAccept(user.id)">Accepter</button>
+        <button mat-flat-button color="warn" (click)="onRefuse(user.id)">Refuser</button>
+    </li>
+</ul>
