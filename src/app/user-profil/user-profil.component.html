@@ -1,8 +1,26 @@
-<h4>Page de profil</h4>
-
 <div *ngIf="user">
 
-    <p> {{user.name}} </p>
+    <h4>{{user.name}}</h4>
+
+    <p> petite description / bio </p>
+
+
+    <br><br>
+    <h4 *ngIf="groupsAdmin.length || groupsMember.length">Mes groupes</h4>
+    <br>
+
+    <h5 *ngIf="groupsAdmin.length">Administrateur</h5>
+    <ul *ngIf="groupsAdmin.length">
+        <li *ngFor="let group of groupsAdmin">
+            <button mat-raised-button color="accent" (click)="onNavigateToGroup(group.idGroup)">{{ group.name }}</button>
+        </li>
+    </ul>
+
+    <h5 *ngIf="groupsMember.length">Membre</h5>
+    <ul *ngIf="groupsMember.length">
+        <li *ngFor="let group of groupsMember">
+            <button mat-raised-button color="primary" (click)="onNavigateToGroup(group.idGroup)">{{ group.name }}</button>
+        </li>
+    </ul>
 
 </div>
-

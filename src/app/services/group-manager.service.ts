@@ -24,7 +24,7 @@ export class GroupManagerService {
     }
 
     /**
-     * return Groupe by id
+     * Change current Groupe by id
      * @param id
      */
     getGroupeById(id: string) {
@@ -34,6 +34,24 @@ export class GroupManagerService {
                     (data) => {
                         this.changeGroup(data?.val());
                         resolve();
+                    }, (error) => {
+                        reject(error);
+                    }
+                );
+            }
+        );
+    }
+
+    /**
+     * Return a group by id //************* --> INUTILISé
+     * @param idGroup
+     */
+    returnGroupById(idGroup: string) {
+        return new Promise<Group>(
+            (resolve, reject) => {
+                firebase.database().ref('/group/' + idGroup).once('value').then(
+                    (data) => {
+                        resolve(data.val());
                     }, (error) => {
                         reject(error);
                     }
