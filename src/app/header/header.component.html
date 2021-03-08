@@ -1,14 +1,16 @@
-<mat-toolbar>
-    <span routerLinkActive="active"><a class="accent" routerLink="home">Accueil</a></span>
+<mat-toolbar color="primary">
+    <button mat-button routerLink="home">Accueil</button>
+
     <span class="example-spacer"></span>
+
     <div *ngIf="!user">
-        <button mat-button color="primary"><a routerLink="auth/signin">Se connecter</a></button>
-        <button mat-button color="primary"><a routerLink="auth/signup">Créer un compte</a></button>
+        <button mat-button routerLink="auth/signin">Se connecter</button>
+        <button mat-button routerLink="auth/signup">Créer un compte</button>
     </div>
 
     <div routerLinkActive="active" *ngIf="user">
         <span *ngIf="user"> {{ user.name }}</span>
-    
+
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
         </button>
@@ -25,6 +27,6 @@
                 <mat-icon>logout</mat-icon>
                 <span>Se déconnecter</span>
             </button>
-            </mat-menu>
+        </mat-menu>
     </div>
- </mat-toolbar>
+</mat-toolbar>

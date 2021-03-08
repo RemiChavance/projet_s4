@@ -32,7 +32,6 @@ import { GroupManagerService } from './services/group-manager.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminGroupComponent } from './group/admin-group/admin-group.component';
 import { GroupAdminGuardService } from './services/group-admin-guard.service';
-import { GroupAdminService } from './services/group-admin.service';
 
 // Comments
 import { ListGroupComponent } from './group/list-group/list-group.component';
@@ -48,13 +47,15 @@ import { CreateRecipeComponent } from './recipe/create-recipe/create-recipe.comp
 import { RateComponent } from './recipe/rate/rate.component';
 import { RateService } from './services/rate.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+import { GroupSubscriptionService } from './services/group-subscription.service';
+import { GroupGuardService } from './services/group-guard.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
   { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
-  { path: 'group/:id', component: GroupComponent },
+  { path: 'group/:id', canActivate:[GroupGuardService], component: GroupComponent },
   { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
   { path: 'group/:id/recipe/:idRecipe', component: RecipeComponent },
   { path: 'group/:id/create-recipe', component: CreateRecipeComponent },
@@ -106,11 +107,11 @@ const appRoutes: Routes = [
     GroupCreationService,
     GroupManagerService,
     GroupAdminGuardService,
-    GroupAdminService,
+    GroupSubscriptionService,
+    GroupGuardService,
     RecipeManagerService,
     CommentCreationService,
     RateService
-
   ],
   bootstrap: [AppComponent]
 })

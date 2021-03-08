@@ -16,20 +16,25 @@
 
 
             <p> {{ recipe.description }} </p>
+
+            
+            <br><br><br><br><br><br><br><br><br>
+            <p><i><b>Work In Progress </b>: les infos de la recette ici</i></p>
+            <br><br><br><br><br><br><br><br><br>
             
             
             <!-- composant pour noter la recette -->
             <h4>Noter cette recette</h4>
             <app-rate [idRecipe]="recipe.idRecipe" [rates]="recipe.rates"></app-rate>
-
-
+            <br><br><br><br>
+            
             <!-- composant pour écrire un commentaire -->
+            <h4>Poster un commentaire</h4>
             <app-create-comment [idRecipe]="recipe.idRecipe"></app-create-comment>
-
-
+            <br><br>
+            
             <!-- composant pour afficher les commentaires -->
             <div *ngIf="recipe.comments">
-                <br>
                 <h4>Commentaires</h4>
                 <app-comment *ngFor="let comment of recipe.comments"
                             [comment]="comment"

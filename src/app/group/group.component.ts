@@ -5,7 +5,6 @@ import { Group } from '../models/group.model';
 import { Recipe } from '../models/recipe.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
-import { GroupAdminService } from '../services/group-admin.service';
 import { GroupManagerService } from '../services/group-manager.service';
 import { RecipeManagerService } from '../services/recipe-manager.service';
 
@@ -28,7 +27,6 @@ export class GroupComponent implements OnInit, OnDestroy {
   constructor(private groupManagerService: GroupManagerService,
               private recipeManagerService: RecipeManagerService,
               private authService: AuthService,
-              private groupAdminService: GroupAdminService,
               private route: ActivatedRoute,
               private router: Router,
               ) { }
@@ -63,8 +61,6 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   accessAdminPage() {
-    this.groupAdminService.user = this.user;
-    this.groupAdminService.group = this.group;
     this.router.navigate(['/group', this.group.idGroup, 'admin']);
   }
 
