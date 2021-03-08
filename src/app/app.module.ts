@@ -32,7 +32,6 @@ import { GroupManagerService } from './services/group-manager.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AdminGroupComponent } from './group/admin-group/admin-group.component';
 import { GroupAdminGuardService } from './services/group-admin-guard.service';
-import { GroupAdminService } from './services/group-admin.service';
 
 // Comments
 import { ListGroupComponent } from './group/list-group/list-group.component';
@@ -107,7 +106,6 @@ const appRoutes: Routes = [
     GroupCreationService,
     GroupManagerService,
     GroupAdminGuardService,
-    GroupAdminService,
     GroupSubscriptionService,
     RecipeManagerService,
     CommentCreationService,

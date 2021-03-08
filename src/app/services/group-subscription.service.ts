@@ -84,7 +84,7 @@ export class GroupSubscriptionService {
                     () => {
                       resolve();
                     }
-                  )
+                  );
                 }
               );
           }
@@ -138,14 +138,21 @@ export class GroupSubscriptionService {
             (data) => {
               let dataArray = [];
               const dataVal = data.val();
+              let i = 0;
               for(const key in dataVal) {
                 if(dataVal[key] != idUser) {
-                  dataArray[key] = dataVal[key];
+                  dataArray[i] = dataVal[key];
+                  i++;
                 }
               }
               firebase.database()
                 .ref('group/' + idGroup + '/requests/')
-                .set(dataArray);
+                .set(dataArray)
+                .then(
+                  () => {
+                    resolve();
+                  }
+                );
             }
           );
       }

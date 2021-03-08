@@ -12,9 +12,9 @@
 <br><br>
 <br><br>
 
-<h5>Demandes d'inscription au groupe : </h5>
 
-<ul>
+<h5 *ngIf="requests.length">Demandes d'inscription au groupe : </h5>
+<ul *ngIf="requests.length">
     <li *ngFor="let user of requests">
         {{user.name}}
         <button mat-flat-button color="accent" (click)="onAccept(user.id)">Accepter</button>
