@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Group } from 'src/app/models/group.model';
 import { User } from 'src/app/models/user.model';
@@ -20,7 +21,8 @@ export class ListGroupComponent implements OnInit, OnDestroy {
 
   constructor(private groupManagerService: GroupManagerService,
               private groupSubscriptionService: GroupSubscriptionService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.groupManagerService.getAllGroups().then(
@@ -40,7 +42,19 @@ export class ListGroupComponent implements OnInit, OnDestroy {
   onSubscribe(idGroup: string) {
     this.groupSubscriptionService.requestSubscription(this.user.id, idGroup).then(
       () => {
-        console.log("inscrit");
+        this.groupManagerService.getAllGroups().then(
+          (data) => {
+            this.groups = data;
+          }
+        );
+      }
+    );
+  }
+
+  onNavigateToGroup(idGroup: string) {
+    this.groupManagerService.getGroupeById(idGroup).then(
+      () => {
+        this.router.navigate(['/group', idGroup]);
       }
     );
   }

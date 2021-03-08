@@ -7,7 +7,7 @@ import { GroupManagerService } from './group-manager.service';
 @Injectable({
   providedIn: 'root'
 })
-export class GroupAdminGuardService implements CanActivate {
+export class GroupGuardService implements CanActivate {
 
   constructor(private router: Router,
               private groupManagerService: GroupManagerService,
@@ -20,13 +20,15 @@ export class GroupAdminGuardService implements CanActivate {
           (group) => {
             this.authService.currentUser.subscribe(
               (user) => {
-                if (group === null || user === null) {
+                if (group == null || user == null) {
                   this.router.navigate(['/home']);
                   resolve(false);
-                } else if (group.adminId === user.id) {
+                } else if (user.groups && user.groups.includes(group.idGroup)) {
+                  resolve(true);
+                } else if (user.id == group.adminId) {
                   resolve(true);
                 } else {
-                  this.router.navigate(['/group', group.idGroup]);
+                  this.router.navigate(['/home']);
                   resolve(false);
                 }
               }

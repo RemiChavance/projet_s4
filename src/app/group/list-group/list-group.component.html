@@ -1,12 +1,35 @@
 <div *ngIf="groups">
 
     <h4>Groupes</h4>
-    
-    <ul>
+
+    <ul *ngIf="user; else notConnected">
         <li *ngFor="let group of groups">
-            <button mat-button routerLink="/group/{{group.idGroup}}">{{ group.name }}</button>
-            <button mat-raised-button color="primary" (click)="onSubscribe(group.idGroup)">S'incrire</button>
+
+            <span *ngIf="user.groups && user.groups.includes(group.idGroup) || group.adminId == user.id; else notInGroup">
+                <button mat-raised-button color="primary" (click)="onNavigateToGroup(group.idGroup)">{{ group.name }}</button>
+            </span>
+
+            <ng-template #notInGroup>
+
+                <span *ngIf="group.requests && group.requests.includes(user.id); else notPendingRequest">
+                    {{ group.name }} <i>Demande en attente</i>
+                </span>
+    
+                <ng-template #notPendingRequest>
+                    {{ group.name }} <button mat-raised-button color="primary" (click)="onSubscribe(group.idGroup)">S'incrire</button>
+                </ng-template>
+
+            </ng-template>
+
         </li>
     </ul>
+
+    <ng-template #notConnected>
+        <ul>
+            <li *ngFor="let group of groups">
+                <button mat-raised-button color="primary" routerLink="/auth/signin">{{ group.name }}</button> 
+            </li>
+        </ul>
+    </ng-template>
 
 </div>

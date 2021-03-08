@@ -48,13 +48,14 @@ import { RateComponent } from './recipe/rate/rate.component';
 import { RateService } from './services/rate.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { GroupSubscriptionService } from './services/group-subscription.service';
+import { GroupGuardService } from './services/group-guard.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
   { path: 'group/create-group', canActivate: [AuthGuardService], component: CreateGroupComponent },
-  { path: 'group/:id', component: GroupComponent },
+  { path: 'group/:id', canActivate:[GroupGuardService], component: GroupComponent },
   { path: 'group/:id/admin', canActivate: [GroupAdminGuardService], component: AdminGroupComponent },
   { path: 'group/:id/recipe/:idRecipe', component: RecipeComponent },
   { path: 'group/:id/create-recipe', component: CreateRecipeComponent },
@@ -107,6 +108,7 @@ const appRoutes: Routes = [
     GroupManagerService,
     GroupAdminGuardService,
     GroupSubscriptionService,
+    GroupGuardService,
     RecipeManagerService,
     CommentCreationService,
     RateService
