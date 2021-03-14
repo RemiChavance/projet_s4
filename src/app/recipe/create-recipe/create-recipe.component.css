@@ -2,6 +2,14 @@
     margin-top: 8px;
   }
   
-  .mat-form-field {
-    margin-top: 16px;
-  }
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.mat-stroked-button {
+  margin: 3px;
+}
+
+.mat-button {
+  margin: 3px;
+}
