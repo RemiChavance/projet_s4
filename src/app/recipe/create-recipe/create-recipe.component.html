@@ -1,11 +1,12 @@
 <h1>Créer une recette</h1>
 
-
 <mat-vertical-stepper [linear]="true" #stepper>
+
+  <!-- Nom de la recette -->
   <mat-step [stepControl]="titleFormGroup">
     <form [formGroup]="titleFormGroup">
       <ng-template matStepLabel>Nom de la recette</ng-template>
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Titre</mat-label>
         <input matInput placeholder="Tarte à la fraise" formControlName="title" required>
       </mat-form-field>
@@ -14,10 +15,12 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- Type de la recette -->
   <mat-step [stepControl]="typeFormGroup">
     <form [formGroup]="typeFormGroup">
       <ng-template matStepLabel>Type de la recette</ng-template>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" color="accent">
         <mat-label>Choisir</mat-label>
         <mat-select formControlName="type">
           <mat-option *ngFor="let type of types" [value]="type.value">
@@ -31,13 +34,14 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- Temps de préparation -->
   <mat-step [stepControl]="prepTimeFormGroup">
     <form [formGroup]="prepTimeFormGroup">
       <ng-template matStepLabel>Temps de préparation</ng-template>
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Temps de préparation</mat-label>
-        <input matInput formControlName="prepTime" placeholder="Ex. 30" type="time"
-                required>
+        <input matInput formControlName="prepTime" placeholder="Ex. 30" type="time" required>
       </mat-form-field>
       <div>
           <button mat-button matStepperPrevious>Retour</button>
@@ -45,13 +49,14 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- Temps total -->
   <mat-step [stepControl]="totalTimeFormGroup">
     <form [formGroup]="totalTimeFormGroup">
       <ng-template matStepLabel>Temps total</ng-template>
-      <mat-form-field>
+      <mat-form-field color="accent">
         <mat-label>Temps total</mat-label>
-        <input matInput formControlName="totalTime" placeholder="Ex. 60" type="time"
-                required>
+        <input matInput formControlName="totalTime" placeholder="Ex. 60" type="time" required>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Retour</button>
@@ -59,26 +64,42 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- Ingrédients -->
   <mat-step [stepControl]="ingredientsFormGroup">
     <form [formGroup]="ingredientsFormGroup">
-      <ng-template matStepLabel>Ingrédients</ng-template>
-        <input matInput placeholder="Ingrédients" formControlName="ingredients" required> 
-      <div>
+      <div formArrayName="ingredients">
+        <ng-template matStepLabel>Ingrédients</ng-template>
+          <div class="form-group" *ngFor="let ingredientControl of getIngredients().controls; let i = index">
+            <input matInput placeholder="Ingrédients" class="form-control" [formControlName]="i">
+          </div>
+        <button mat-stroked-button color="accent" (click)="onAddIngredient()">Ajouter un ingrédient</button>
+        <button mat-stroked-button color="accent" (click)="onDelIngredient()">Supprimer le dernier ingrédient</button>
+        <br>
         <button mat-button matStepperPrevious>Retour</button>
         <button mat-button matStepperNext>Suivant</button>
       </div>
     </form>
   </mat-step>
+
+  <!-- Etapes -->
   <mat-step [stepControl]="stepsFormGroup">
     <form [formGroup]="stepsFormGroup">
-      <ng-template matStepLabel>Etapes</ng-template>
-        <input matInput placeholder="Ingrédients" formControlName="steps" required> 
-      <div>
+      <div formArrayName="steps">
+        <ng-template matStepLabel>Etape</ng-template>
+        <div class="form-group" *ngFor="let stepControl of getSteps().controls; let i = index">
+          <input matInput placeholder="Etapes" class="form-control" [formControlName]="i">
+        </div>
+        <button mat-stroked-button color="accent" (click)="onAddStep()">Ajouter une étape</button>
+        <button mat-stroked-button color="accent" (click)="onDelStep()">Supprimer la dernière étape</button>
+        <br>
         <button mat-button matStepperPrevious>Retour</button>
         <button mat-button matStepperNext>Suivant</button>
       </div>
     </form>
   </mat-step>
+
+  <!-- Description -->
   <mat-step [stepControl]="descripFormGroup">
     <form [formGroup]="descripFormGroup">
       <ng-template matStepLabel>Description</ng-template>
@@ -89,6 +110,8 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- Récapitulatif -->
   <mat-step>
     <ng-template matStepLabel>Récapitulatif</ng-template>
     <p>afficher un récap. de la recette</p>
@@ -97,4 +120,5 @@
       <button mat-button (click)="onSubmit()">Envoyer</button>
     </div>
   </mat-step>
+
 </mat-vertical-stepper>

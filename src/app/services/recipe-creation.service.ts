@@ -10,7 +10,7 @@ export class RecipeCreationService {
 
   constructor() {}
 
-  createNewRecipe(title: string, type: string, prepTime: number, totalTime: number, ingredients: string, steps: string, description: string, author: string, idGroup: number) {
+  createNewRecipe(title: string, type: string, prepTime: number, totalTime: number, ingredients: string[], steps: string[], description: string, author: string, idGroup: number) {
     return new Promise<string>(
       (resolve, reject) => {
         const newRecipe: Recipe = new Recipe("-1", idGroup, title, type, prepTime, totalTime, ingredients, steps, description, author, [], []);

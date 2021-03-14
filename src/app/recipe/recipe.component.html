@@ -9,18 +9,46 @@
             <h4> 
                 {{ recipe.title }}
 
-                <mat-icon *ngFor="let fullStar of fullStars">star</mat-icon>
-                <mat-icon *ngFor="let emptyStar of emptyStars">star_border</mat-icon>
+                <mat-icon class="star" *ngFor="let fullStar of fullStars">star</mat-icon>
+                <mat-icon class="star" *ngFor="let emptyStar of emptyStars">star_border</mat-icon>
                 <span class="moyenne">{{ moyenne | number : '1.0-1' }} / 5</span>
             </h4>
 
 
-            <p> {{ recipe.description }} </p>
+            <p>
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip color="accent" selected>{{ recipe.type }} </mat-chip>
+                </mat-chip-list>
+            </p>
+
+            <p>
+                {{ recipe.description }}
+            </p>
 
             
-            <br><br><br><br><br><br><br><br><br>
-            <p><i><b>Work In Progress </b>: les infos de la recette ici</i></p>
-            <br><br><br><br><br><br><br><br><br>
+            <br><br>
+
+
+            <p>
+                <mat-icon color="accent">timer</mat-icon> Préparation : {{ recipe.prepTime }} | Total :  {{ recipe.totalTime }}
+            </p>
+
+            <p>Ingrédients :</p>
+
+            <ul>
+                <li *ngFor="let ingredient of recipe.ingredients"> {{ ingredient }} </li>
+            </ul>
+
+            <p>Etapes :</p>
+
+            <ul>
+                <li *ngFor="let step of recipe.steps; let i = index"> {{ i + 1 }}. {{ step }}</li>
+            </ul>
+
+
+
+
+            <br><br><br><br>
             
             
             <!-- composant pour noter la recette -->

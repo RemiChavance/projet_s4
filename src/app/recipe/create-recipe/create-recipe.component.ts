@@ -1,5 +1,5 @@
   import {Component, OnDestroy, OnInit} from '@angular/core';
-  import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+  import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
   import { ActivatedRoute, Router } from '@angular/router';
   import { Subscription } from 'rxjs';
   import { Recipe } from 'src/app/models/recipe.model';
@@ -72,10 +72,10 @@
         totalTime: ['', Validators.required]
       });
       this.ingredientsFormGroup = this.formBuilder.group({
-        ingredients: ['', Validators.required]
+        ingredients: this.formBuilder.array([])
       });
       this.stepsFormGroup = this.formBuilder.group({
-        steps: ['', Validators.required]
+        steps: this.formBuilder.array([])
       });
       this.descripFormGroup = this.formBuilder.group({
         description: ['', Validators.required]
@@ -102,6 +102,33 @@
         }
       );
     }
+
+
+    // Gère la création dynamique d'input dans le formulaire pour les ingrédients et les étapes
+    getIngredients(): FormArray {
+      return this.ingredientsFormGroup.get('ingredients') as FormArray;
+    }
+    onAddIngredient() {
+      const newIngredientControl = this.formBuilder.control(null, Validators.required);
+      this.getIngredients().push(newIngredientControl);
+    }
+    onDelIngredient() {
+      this.getIngredients().removeAt(this.getIngredients().length-1);
+    }
+
+    getSteps(): FormArray {
+      return this.stepsFormGroup.get('steps') as FormArray;
+    }
+    onAddStep() {
+      const newStepControl = this.formBuilder.control(null, Validators.required);
+      this.getSteps().push(newStepControl);
+    }
+    onDelStep() {
+      this.getSteps().removeAt(this.getSteps().length-1);
+    }
+
+
+
 
     ngOnDestroy() {
       this.userSubscription.unsubscribe();

@@ -53,15 +53,17 @@ export class RateComponent implements OnInit, OnDestroy {
    * Check if current user has already rated the recipe
    */
   hasAlreadyRated() {
-    this.rates.forEach(rate => {
-      if(rate.idAuthor == this.user.id) {
-        this.hasRated = true;
-        this.rateIndex = rate.idRate;
-      }
-    });
+    if(this.rates) {
+      this.rates.forEach(rate => {
+        if(rate.idAuthor == this.user.id) {
+          this.hasRated = true;
+          this.rateIndex = rate.idRate;
+        }
+      });
 
-    if(this.hasRated) {
-      this.displayRatingUser(this.rates[this.rateIndex].description); 
+      if(this.hasRated) {
+        this.displayRatingUser(this.rates[this.rateIndex].description); 
+      }
     }
   }
 
