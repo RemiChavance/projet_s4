@@ -82,6 +82,7 @@ export class RateComponent implements OnInit, OnDestroy {
           () => {
             this.recipeManagerService.refreshRecipe();
             this.displayRatingUser(nbStar);
+            this.rates = [];
             this.rateIndex = this.rates.length;
             this.rates.push(new Rate(this.rateIndex, nbStar, this.user.id));
             this.hasRated = true;
