@@ -3,14 +3,28 @@
         <h2>Créer un groupe</h2>
 
         <form [formGroup]="createGroupForm" (ngSubmit)="onSubmit()" class="example-form">
+
             <mat-form-field class="example-full-width">
                 <mat-label>Nom</mat-label>
                 <input matInput
                     type="text"
                     id="name"
-                    
-                    formControlName="name"            >
-              </mat-form-field>
+                    formControlName="name"
+                >
+            </mat-form-field>
+
+            <br><br>
+
+            <section>
+                <mat-checkbox
+                    id="isPublic"
+                    formControlName="isPublic">
+                    Groupe Public
+                </mat-checkbox>
+            </section>
+
+            <br><br>
+
             <button mat-raised-button color="primary" type="submit" [disabled]="createGroupForm.invalid">Créer mon groupe</button>
         </form>
 

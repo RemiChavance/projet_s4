@@ -9,10 +9,11 @@ export class GroupCreationService {
 
     constructor() { }
 
-    createNewGroupe(name: string, adminId: string) {
+    createNewGroupe(name: string, adminId: string, isPublic: boolean) {
         return new Promise<string>(
             (resolve, reject) => {
                 const newGroup: Group = new Group(name, adminId);
+                newGroup.isPublic = isPublic;
                 newGroup.requests = [];
                 newGroup.stats = [];
 

@@ -35,16 +35,19 @@ export class CreateGroupComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.createGroupForm = this.formBuilder.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      isPublic: [false, [Validators.required]],
     });
   }
 
   onSubmit() {
     const name = this.createGroupForm.get('name').value;
+    const isPublic = this.createGroupForm.get('isPublic').value;
     const user = this.user;
     console.log(this.user);
+    console.log(isPublic);
 
-    this.groupCreationService.createNewGroupe(name, user.id).then(
+    this.groupCreationService.createNewGroupe(name, user.id, isPublic).then(
       (id) => {
         this.router.navigate(['/group', id]);
       },

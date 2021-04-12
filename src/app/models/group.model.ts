@@ -7,5 +7,6 @@ export class Group {
         public idGroup?: string,
         public requests?: string[],
         public stats?: Stat[],
+        public isPublic?: boolean
     ) { }
 }

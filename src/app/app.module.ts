@@ -18,7 +18,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // Custom
 import { SignupComponent } from './auth/signup/signup.component';
@@ -101,7 +102,8 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatMenuModule,
     MatTableModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCheckboxModule
   ],
   providers: [
     AuthService,
