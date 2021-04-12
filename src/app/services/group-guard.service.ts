@@ -23,6 +23,8 @@ export class GroupGuardService implements CanActivate {
                 if (group == null || user == null) {
                   this.router.navigate(['/home']);
                   resolve(false);
+                } else if (group.isPublic) {
+                  resolve(true);
                 } else if (user.groups && user.groups.includes(group.idGroup)) {
                   resolve(true);
                 } else if (user.id == group.adminId) {

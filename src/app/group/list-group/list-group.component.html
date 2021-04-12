@@ -5,7 +5,7 @@
     <ul *ngIf="user; else notConnected">
         <li *ngFor="let group of groups">
 
-            <span *ngIf="user.groups && user.groups.includes(group.idGroup) || group.adminId == user.id; else notInGroup">
+            <span *ngIf="user.groups && user.groups.includes(group.idGroup) || group.adminId == user.id || group.isPublic; else notInGroup">
                 <button mat-raised-button color="primary" (click)="onNavigateToGroup(group.idGroup)">{{ group.name }}</button>
             </span>
 
