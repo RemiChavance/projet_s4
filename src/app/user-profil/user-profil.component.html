@@ -23,4 +23,12 @@
         </li>
     </ul>
 
+    <br><br>
+    <h4 *ngIf="favoritesRecipe.length">Recettes en Favoris</h4>
+    <ul *ngIf="favoritesRecipe.length">
+        <li *ngFor="let recipe of favoritesRecipe">
+            <button mat-raised-button color="primary" (click)="onNavigateToRecipe(recipe)">{{ recipe.title }}</button>
+        </li>
+    </ul>
+
 </div>

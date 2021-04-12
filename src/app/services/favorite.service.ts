@@ -1,31 +1,29 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-import { Rate } from '../models/rate.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RateService {
+export class FavoriteService {
 
   constructor() { }
 
   /**
-   * Create new Rate
-   * @param rate 
+   * Add a favorite to user
    * @param idRecipe 
-   * @param idAuthor 
+   * @param idUser 
    */
-  postNewRate(rate: number, idRecipe: string, idAuthor: string) {
+  postNewFavorite(idRecipe: string, idUser: string) {
     return new Promise<void>(
       (resolve, reject) => {
-        this.getNextId(idRecipe).then(
-          (nextRateId) => {
-            const newRate = new Rate(nextRateId, rate, idAuthor);
+        this.getNextId(idUser).then(
+          (nextFavoriteId) => {
             firebase.database()
-            .ref('recipe/' + idRecipe + '/rates/' + nextRateId)
-            .set(newRate)
+            .ref('user/' + idUser + '/favorites/' + nextFavoriteId)
+            .set(idRecipe)
             .then(
               () => {
+                console.log(idRecipe);
                 resolve();
               }
             );
@@ -36,35 +34,14 @@ export class RateService {
   }
 
   /**
-   * Repost a Rate
-   * @param rate 
-   * @param idRecipe 
-   */
-  repostRate(rate: Rate, idRecipe: string) {
-    return new Promise<void>(
-      (resolve, reject) => {
-        firebase.database()
-        .ref('recipe/' + idRecipe + '/rates/' + rate.idRate)
-        .set(rate)
-        .then(
-          () => {
-            console.log(idRecipe);
-            resolve();
-          }
-        );
-      }
-    );
-  }
-
-  /**
    * Return new available id
-   * @param idRecipe 
+   * @param idUser 
    */
-  getNextId(idRecipe: string) {
+   getNextId(idUser: string) {
     return new Promise<number>(
       (resolve, reject) => {
         firebase.database()
-          .ref('recipe/' + idRecipe + '/rates/')
+          .ref('user/' + idUser + '/favorites/')
           .orderByKey()
           .limitToLast(1)
           .once('value')
@@ -82,6 +59,28 @@ export class RateService {
               }
             }
           );
+      }
+    );
+  }
+
+
+  /**
+   * Upload favorite array to user database
+   * @param favorites 
+   * @param idUser 
+   * @returns 
+   */
+  deleteFavorite(favorites: string[], idUser: string) {
+    return new Promise<void>(
+      (resolve, reject) => {
+        firebase.database()
+        .ref('user/' + idUser + '/favorites')
+        .set(favorites)
+        .then(
+          () => {
+            resolve();
+          }
+        );
       }
     );
   }

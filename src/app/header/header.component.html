@@ -16,11 +16,11 @@
         </button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onProfil()">
-                <mat-icon>account_circle</mat-icon>
+                <mat-icon class="profil">account_circle</mat-icon>
                 <span>Profil</span>
             </button>
-            <button mat-menu-item disabled>
-                <mat-icon>favorite</mat-icon>
+            <button mat-menu-item (click)="onFavorites()">
+                <mat-icon class="heart">favorite</mat-icon>
                 <span>Favoris</span>
             </button>
             <button mat-menu-item type="button" (click)="onSignOut()">

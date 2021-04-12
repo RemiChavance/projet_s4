@@ -68,4 +68,24 @@ export class RecipeManagerService {
       }
     );
   }
+
+
+  /**
+   * Get recipe by it's id
+   * @param idRecipe 
+   */
+   getUniqueRecipeById(idRecipe: string) {
+    return new Promise<Recipe>(
+      (resolve, reject) => {
+        firebase.database()
+          .ref('recipe/' + idRecipe)
+          .once('value')
+          .then(
+            (recipe) => {
+              resolve(recipe.val());
+            }
+          );
+      }
+    );
+  }
 }

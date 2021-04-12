@@ -7,6 +7,7 @@ export class User {
         public name?: string,
         public groups?: string[],
         public rates?: number[],
-        public nbComments?: number
+        public nbComments?: number,
+        public favorites?: string[]
     ) { }
 }

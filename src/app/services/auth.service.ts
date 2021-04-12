@@ -38,6 +38,7 @@ export class AuthService {
             user.nbComments = 5;
             user.rates = [1, 5 , 3];
             user.groups = [];
+            user.favorites = [];
             // ----------------------------------------------
             firebase.database().ref('/user/' + user.id).set(user);
             this.changeUser(user);

@@ -51,6 +51,8 @@ import { RateService } from './services/rate.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { GroupSubscriptionService } from './services/group-subscription.service';
 import { GroupGuardService } from './services/group-guard.service';
+import { FavoriteComponent } from './recipe/favorite/favorite.component';
+import { FavoriteService } from './services/favorite.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -83,7 +85,8 @@ const appRoutes: Routes = [
     CreateCommentComponent,
     ListRecipeComponent,
     RateComponent,
-    UserProfilComponent
+    UserProfilComponent,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +118,8 @@ const appRoutes: Routes = [
     GroupGuardService,
     RecipeManagerService,
     CommentCreationService,
-    RateService
+    RateService,
+    FavoriteService
   ],
   bootstrap: [AppComponent]
 })

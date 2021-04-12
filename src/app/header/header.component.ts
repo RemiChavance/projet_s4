@@ -48,6 +48,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(["/user", this.user.id]);
   }
 
+  onFavorites() {
+    this.router.navigate(["/user", this.user.id]);
+  }
+
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }

@@ -1,0 +1,8 @@
+.favorite:hover {
+    cursor: pointer;
+}
+
+.favorite {
+    padding: 10px;
+    color: red;
+}

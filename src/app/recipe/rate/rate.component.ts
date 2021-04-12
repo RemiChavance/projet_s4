@@ -14,7 +14,7 @@ import { RecipeManagerService } from 'src/app/services/recipe-manager.service';
 })
 export class RateComponent implements OnInit, OnDestroy {
 
-  @Input() idRecipe: number;
+  @Input() idRecipe: string;
   @Input() rates: Rate[];
 
   rateIndex: number = -1;
