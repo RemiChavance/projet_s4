@@ -33,10 +33,8 @@ export class AuthService {
             );
             user.email = email;
             user.name = name;
-            // -- A replacer par les valeurs du formulaire --
-            //   auth/signup par la suite
-            user.nbComments = 5;
-            user.rates = [1, 5 , 3];
+            user.nbComments = 0;
+            user.rates = [];
             user.groups = [];
             user.favorites = [];
             // ----------------------------------------------
@@ -98,6 +96,55 @@ export class AuthService {
         firebase.database().ref('/user/' + id).once('value').then(
           (data) => {
             resolve(data.val());
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  /**
+   * Return an array of all user in the data base
+   * @returns 
+   */
+  getAllUser() {
+    return new Promise<User[]>(
+      (resolve, reject) => {
+        firebase.database().ref('/user').once('value').then(
+          (data) => {
+            var users: User[] = [];
+            const dataVal = data.val();
+            for(const key in dataVal) {
+              users.push(dataVal[key]);
+            }
+            resolve(users);
+          }, (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  /**
+   * Add +1 to user's comments counter
+   * @param id 
+   * @returns 
+   */
+  addNewComment(id: string) {
+    return new Promise<void>(
+      (resolve, reject) => {
+        firebase.database().ref('/user/' + id + '/nbComments').once('value').then(
+          (oldNbComments) => {
+            firebase.database()
+            .ref('/user/' + id + '/nbComments')
+            .set(oldNbComments.val() + 1)
+            .then(
+              () => {
+                resolve();
+              }
+            );
           }, (error) => {
             reject(error);
           }

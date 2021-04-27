@@ -47,6 +47,7 @@ export class CreateCommentComponent implements OnInit, OnDestroy {
 
     this.commentCreationService.createNewComment(comment, this.user.id, this.idRecipe).then(
       () => {
+        this.authService.addNewComment(this.user.id);
         this.recipeManagerService.refreshRecipe();
         this.createCommentForm.reset();
       }
