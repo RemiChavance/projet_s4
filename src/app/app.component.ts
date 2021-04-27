@@ -11,17 +11,17 @@ export class AppComponent {
 
   constructor() {
 
-    // Firebase access
+    // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyC1zspIj9wrsBiQX16g20kEfWJ0C-oGqDI",
-      authDomain: "projet-s4-ghac.firebaseapp.com",
-      databaseURL: "https://projet-s4-ghac-default-rtdb.firebaseio.com",
-      projectId: "projet-s4-ghac",
-      storageBucket: "projet-s4-ghac.appspot.com",
-      messagingSenderId: "378917706292",
-      appId: "1:378917706292:web:00d412b6082bb39b0fc861"
+      apiKey: "AIzaSyD0jinb4_fJfj7tiXFpA8ynOtB8VqWoWRE",
+      authDomain: "projet-s4-dev.firebaseapp.com",
+      databaseURL: "https://projet-s4-dev-default-rtdb.firebaseio.com",
+      projectId: "projet-s4-dev",
+      storageBucket: "projet-s4-dev.appspot.com",
+      messagingSenderId: "624618870456",
+      appId: "1:624618870456:web:8fc1bbdc57b297da1a464d"
     };
-
+    
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   }
