@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../models/recipe.model';
 import { RecipeManagerService } from '../services/recipe-manager.service';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-recipe',
@@ -62,5 +64,25 @@ export class RecipeComponent implements OnInit {
 
   onBack() {
     this.router.navigate(['/group', this.recipe.idGroup]);
+  }
+
+  onSave() {
+    var data = document.getElementById('contentToConvert');
+    data.style.color = 'black'; // for pdf visibility
+    html2canvas(data).then(
+      canvas => {
+        data.style.color = 'white'; // back to web visibility
+        // Few necessary setting options
+        var imgWidth = 208;
+        var pageHeight = 1000;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+
+        const contentDataURL = canvas.toDataURL('image/png');
+        let pdf = new jsPDF('portrait', 'mm', 'a4'); // A4 size page of PDF
+        pdf.addImage(contentDataURL, 'PNG', 0, 10, imgWidth, imgHeight)
+        pdf.save(this.recipe.title + '.pdf'); // Generated PDF
+      }
+    );
   }
 }

@@ -49,7 +49,9 @@ export class AdminGroupComponent implements OnInit, OnDestroy {
             this.recipes = recipes;
             if(this.recipes) {
               this.recipes.forEach(recipe => {
-                this.nbComments = this.nbComments + recipe.comments.length;
+                if(recipe.comments) {
+                  this.nbComments = this.nbComments + recipe.comments.length;
+                }
               });
             }
           }
