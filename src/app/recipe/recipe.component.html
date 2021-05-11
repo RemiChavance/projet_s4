@@ -52,18 +52,16 @@
 
             </div>
 
-            <br><br>
+            <br>
 
             <button mat-flat-button color="warn" (click)="onSave()"><mat-icon>save_alt</mat-icon> Sauvegarder</button>
 
-            <br><br><br><br>
-            
-            
-            <!-- composant pour noter la recette -->
-            <h4>Noter cette recette</h4>
             <app-rate [idRecipe]="recipe.idRecipe" [rates]="recipe.rates"></app-rate>
-            <br><br><br><br>
+
+
+            <app-image [photos]="recipe.photos" [idRecipe]="recipe.idRecipe"></app-image>
             
+            <br><br>
             <!-- composant pour écrire un commentaire -->
             <h4>Poster un commentaire</h4>
             <app-create-comment [idRecipe]="recipe.idRecipe"></app-create-comment>

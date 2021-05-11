@@ -103,7 +103,6 @@
       );
     }
 
-
     // Gère la création dynamique d'input dans le formulaire pour les ingrédients et les étapes
     getIngredients(): FormArray {
       return this.ingredientsFormGroup.get('ingredients') as FormArray;

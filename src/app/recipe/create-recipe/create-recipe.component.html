@@ -106,19 +106,23 @@
         <textarea matInput placeholder="Description de la recette..." formControlName="description" required></textarea>
       <div>
         <button mat-button matStepperPrevious>Retour</button>
-        <button mat-button matStepperNext>Suivant</button>
+        <!--<button mat-button matStepperNext>Suivant</button>-->
+        <button mat-button (click)="onSubmit()">Envoyer</button>
       </div>
     </form>
   </mat-step>
 
-  <!-- Récapitulatif -->
+  <!-- Photos ou Récapitulatif ?
   <mat-step>
-    <ng-template matStepLabel>Récapitulatif</ng-template>
-    <p>afficher un récap. de la recette</p>
+    <ng-template matStepLabel>Photos</ng-template>
+    <p>Vous pouvez ajouter jusqu'à 3 photos !</p>
+
+    <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
+
     <div>
       <button mat-button matStepperPrevious>Retour</button>
       <button mat-button (click)="onSubmit()">Envoyer</button>
     </div>
-  </mat-step>
+  </mat-step>-->
 
 </mat-vertical-stepper>

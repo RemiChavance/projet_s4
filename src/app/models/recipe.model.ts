@@ -14,6 +14,7 @@ export class Recipe {
         public description: string,
         public author: string,
         public rates?: Rate[],
-        public comments?: Comment[]
+        public comments?: Comment[],
+        public photos?: string[]
     ) { }
 }

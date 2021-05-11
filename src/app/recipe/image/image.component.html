@@ -1,0 +1,43 @@
+<div *ngIf="photos.length > 1; else noPhotoBlock" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li *ngFor="let photo of photos | slice:1; let i = index" data-target="#carouselExampleIndicators" data-slide-to="i"></li>
+    </ol>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img [src]="photos[0]" class="d-block w-100" alt="photos[0]">
+        </div>
+        <div *ngFor="let photo of photos | slice:1" class="carousel-item">
+            <img [src]="photo" class="d-block w-100" alt="photo">
+        </div>
+    </div>
+
+
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<ng-template #noPhotoBlock>
+    <br><br>
+    <i>Pas encore de photos ?</i>
+</ng-template>
+
+<div *ngIf="photos.length < 15" class="row justify-content-md-center text-center">
+    <div class="col-4">
+        Ajouter une photo
+        <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">
+        <p *ngIf="uploading">En cours d'envoi ...</p>
+        <p *ngIf="uploaded">Envoi réussi !</p>
+    </div>
+</div>
+
+

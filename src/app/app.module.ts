@@ -53,6 +53,8 @@ import { GroupSubscriptionService } from './services/group-subscription.service'
 import { GroupGuardService } from './services/group-guard.service';
 import { FavoriteComponent } from './recipe/favorite/favorite.component';
 import { FavoriteService } from './services/favorite.service';
+import { ImageComponent } from './recipe/image/image.component';
+import { ImageService } from './services/image.service';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -86,7 +88,8 @@ const appRoutes: Routes = [
     ListRecipeComponent,
     RateComponent,
     UserProfilComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,8 @@ const appRoutes: Routes = [
     RecipeManagerService,
     CommentCreationService,
     RateService,
-    FavoriteService
+    FavoriteService,
+    ImageService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,3 +5,8 @@ mat-icon {
 mat-icon:hover {
     cursor: pointer;
 }
+
+span {
+    padding-left: 25%;
+    padding-right: 21%;
+}
