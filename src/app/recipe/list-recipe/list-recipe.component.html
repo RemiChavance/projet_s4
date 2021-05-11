@@ -9,15 +9,16 @@
           <mat-card-title><a routerLink="/group/{{idGroup}}/recipe/{{recipe.idRecipe}}"> {{ recipe.title }} </a></mat-card-title>
           <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://source.unsplash.com/collection/12187581/1600x900">
-        <mat-card-content>
-          <p>
-            {{ recipe.description }}
-          </p>
-        </mat-card-content>
+
+        <img *ngIf="recipe.photos.length > 0; else noImgBlock" mat-card-image [src]="recipe.photos[0]">
+        <ng-template #noImgBlock>
+          <img mat-card-image src="https://source.unsplash.com/collection/12187581/1600x900">
+        </ng-template>
+        
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          {{ recipe.description }}
+          <app-favorite [idRecipe]="recipe.idRecipe"></app-favorite>
+          <!--<button mat-button>SHARE</button>-->
         </mat-card-actions>
     </mat-card>
 

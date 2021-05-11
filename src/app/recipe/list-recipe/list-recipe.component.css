@@ -14,3 +14,7 @@ li {
 .exemple-header-image {
     background-color: blue;
 }
+
+mat-card-actions {
+    text-align: center;
+}
