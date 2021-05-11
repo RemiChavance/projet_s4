@@ -1,4 +1,4 @@
-<div *ngIf="photos && photos.length > 1; else noPhotoBlock" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<div *ngIf="photos != undefined && photos.length > 0; else noPhotoBlock" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -31,7 +31,8 @@
     <i>Pas encore de photos ?</i>
 </ng-template>
 
-<div *ngIf="photos && photos.length < 15" class="row justify-content-md-center text-center">
+<!--<div *ngIf="photos != undefined && photos.length < 15" class="row justify-content-md-center text-center">-->
+<div class="row justify-content-md-center text-center">
     <div class="col-4">
         Ajouter une photo
         <input type="file" (change)="detectFiles($event)" class="form-control" accept="image/*">

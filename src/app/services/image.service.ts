@@ -33,6 +33,7 @@ export class ImageService {
               (url) => {
                 this.addUrlFileToRecipe(url, idRecipe).then(
                   () => {
+                    console.log("Envoyé !")
                     resolve();
                   }
                 );
