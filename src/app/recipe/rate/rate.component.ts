@@ -100,7 +100,7 @@ export class RateComponent implements OnInit, OnDestroy {
   }
 
   onMouseOut() {
-    if(this.hasRated) {
+    if(this.hasRated && this.rates) {
       this.displayRatingUser(this.rates[this.rateIndex].description);
     } else {
       this.star1 = "star_border";

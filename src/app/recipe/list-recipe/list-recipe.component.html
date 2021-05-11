@@ -10,10 +10,7 @@
           <mat-card-subtitle>{{ recipe.type }}</mat-card-subtitle>
         </mat-card-header>
 
-        <img *ngIf="recipe.photos.length > 0; else noImgBlock" mat-card-image [src]="recipe.photos[0]">
-        <ng-template #noImgBlock>
-          <img mat-card-image src="https://source.unsplash.com/collection/12187581/1600x900">
-        </ng-template>
+        <img *ngIf="recipe.photos && recipe.photos.length > 0; else noImgBlock" mat-card-image [src]="recipe.photos[0]">
         
         <mat-card-actions>
           {{ recipe.description }}
@@ -25,5 +22,9 @@
   </li>
 
 </ul>
+
+<ng-template #noImgBlock>
+  <img mat-card-image src="https://source.unsplash.com/collection/12187581/1600x900">
+</ng-template>
 
 <ng-template #noRecipes><p>Il n'y a pas encore de recettes.</p></ng-template>

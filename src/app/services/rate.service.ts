@@ -48,7 +48,6 @@ export class RateService {
         .set(rate)
         .then(
           () => {
-            console.log(idRecipe);
             resolve();
           }
         );

@@ -19,8 +19,6 @@ export class ImageComponent implements OnInit {
               private recipeManagerService: RecipeManagerService) { }
 
   ngOnInit(): void {
-    console.log(this.photos);
-    console.log(this.photos.slice(1));
   }
 
   detectFiles(event) {

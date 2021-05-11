@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Group } from 'src/app/models/group.model';
 import { Recipe } from 'src/app/models/recipe.model';
@@ -35,10 +36,14 @@ export class AdminGroupComponent implements OnInit, OnDestroy {
   // User that comment the most
   mostCommentUser: User;
 
+  // Best rated recipe
+  bestRatedRecipe: { recipe: Recipe, average: number };
+
   constructor(private groupManagerService: GroupManagerService,
               private recipeManagerService: RecipeManagerService,
               private authService: AuthService,
-              private groupSubscriptionService: GroupSubscriptionService) { }
+              private groupSubscriptionService: GroupSubscriptionService,
+              private router: Router) { }
 
   ngOnInit() {
     // Get the current user
@@ -58,12 +63,42 @@ export class AdminGroupComponent implements OnInit, OnDestroy {
         this.recipeManagerService.getAllRecipesFromGroup(this.group.idGroup).then(
           (recipes) => {
             this.recipes = recipes;
-            // Get number of comment
+            
             if(this.recipes) {
+
+              // intialising best rated recipe
+              this.bestRatedRecipe = {recipe: null, average: 0};
+              this.bestRatedRecipe.recipe = this.recipes[0];
+              let av = 0;
+              let nbRate = 0;
+              this.recipes[0].rates.forEach(rate => {
+                av = av + rate.description;
+                nbRate++;
+              });
+              this.bestRatedRecipe.average = av/nbRate;
+
+
               this.recipes.forEach(recipe => {
+                // get number of comment
                 if(recipe.comments) {
                   this.nbComments = this.nbComments + recipe.comments.length;
                 }
+
+                // get best rated recipe
+                av = 0;
+                nbRate = 0;
+                if(recipe.rates) {
+                  recipe.rates.forEach(rate => {
+                    av = av + rate.description;
+                    nbRate++; 
+                  });
+                  av = av/nbRate;
+                  if(av > this.bestRatedRecipe.average) {
+                    this.bestRatedRecipe.recipe = recipe;
+                    this.bestRatedRecipe.average = av;
+                  }
+                }
+
               });
             }
           }
@@ -130,6 +165,14 @@ export class AdminGroupComponent implements OnInit, OnDestroy {
         this.groupManagerService.refreshGroup();
       }
     );
+  }
+
+  /**
+   * Navigate to recipe
+   * @param recipe 
+   */
+  onNavigateToRecipe(recipe: Recipe) {
+    this.router.navigate(["/group", recipe.idGroup, "recipe", recipe.idRecipe]);
   }
 
   ngOnDestroy() {
