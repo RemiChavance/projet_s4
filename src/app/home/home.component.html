@@ -1,8 +1,43 @@
-<h2>Accueil</h2>
-
-<button mat-raised-button color="accent" (click)="onCreateGroupe()">Créer un groupe</button>
+<h2><i>(Re)</i> trouvez les meilleurs recettes sur</h2>
+<h2><i>Marmiton</i></h2>
 
 <br>
-<br>
 
-<app-list-group></app-list-group>
+<img src="https://source.unsplash.com/collection/12187581/1600x900">
+<p class="legende"><i>Vos Meilleurs Photos</i></p>
+
+<br><br>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm">
+            <h4>Rejoignez un groupe</h4>
+            <h4>vos groupes <mat-icon>groups</mat-icon></h4>
+            <br><br>
+            <app-list-group></app-list-group>
+        </div>
+
+        <div class="col-sm">
+            <h4>Créer vos groupes</h4>
+            <h4>Partager vos envies</h4>
+            <br><br>
+            <button mat-raised-button color="accent" (click)="onCreateGroupe()">Créer un groupe</button>
+        </div>
+
+        <div class="col-sm">
+            <h4>Ecrivez vos recettes</h4>
+            <h4>Réalisez des recette</h4>
+            <br><br>
+            <p>
+                Créez,
+                <br>Notez,
+                <br>Partager,
+                <br>Commentez,
+                <br>Sauvegarder,
+            </p>
+            <h5><i>Vos meilleurs recettes</i></h5>
+        </div>
+        
+    </div>
+</div>
