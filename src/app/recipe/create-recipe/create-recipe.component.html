@@ -86,7 +86,7 @@
   <mat-step [stepControl]="stepsFormGroup">
     <form [formGroup]="stepsFormGroup">
       <div formArrayName="steps">
-        <ng-template matStepLabel>Etape</ng-template>
+        <ng-template matStepLabel>Etapes</ng-template>
         <div class="form-group" *ngFor="let stepControl of getSteps().controls; let i = index">
           <input matInput placeholder="Etapes" class="form-control" [formControlName]="i">
         </div>
